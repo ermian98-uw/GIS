@@ -1,0 +1,86 @@
+/* Eric Anderson */
+/* TGIS 503 */
+/* Lab 1 */
+/* style.css */
+
+/* Selectors are in alphabetical order */
+
+body {
+  font-size: 100%;
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  background-color: #DDDFFF;
+}
+
+#left {
+  float: left;
+  width: 300px;
+  padding-left: 330px;
+}
+
+h1 {
+  font-size: 180%;
+  font-family: Tahoma, serif;
+  color: purple;
+  text-align: center;
+}
+
+h4 {
+  font-size: 80%;
+  font-family: Tahoma, serif;
+  color: purple;
+  text-align: left;
+  background-color: #F5F4B5;
+  margin-left: 75px;
+  margin-right: 75px;
+}
+
+iframe {
+  width: 300px;
+  height: 300px;
+  border: ridge;
+  border-width: thick;
+  padding: 3px;
+}
+
+img {
+  width: 45%;
+  border: 5px solid #611111;
+}
+
+#main { width: 800px; }
+
+marquee {
+  font-size: 18px;
+  width: 45%;
+  color: #CFF12F;
+}
+
+p.caption {
+  padding-top: 400px;
+  font-family: Times, sans-serif;
+  font-size: 99%;
+  font-style: italic;
+}
+
+.husk {
+  font-family: Lucida, serif;
+  font-style: oblique 5deg;
+  font-size: 225%
+}
+
+.map_caption { font-size: 80%; }
+
+#right {
+  float: right;
+  width: 600px;
+  padding-right: 265px;
+}
+
+ul {
+  column-count: 4;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 400px;
+  padding-right: 265px;
+}
