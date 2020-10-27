@@ -1,0 +1,107 @@
+<DOCTYPE html>
+
+<html>
+  <head>
+    <!--CSS styles-->
+    <style>
+      body {
+    	  font-family: sans-serif;
+        background-color: #FFEFEF;
+      	max-width: 900px;
+       	margin: auto;
+      }
+      #legend {
+        line-height: 0px;
+        background: white;
+        border: solid;
+        border-width: 4px;
+        opacity: 0.92;
+        padding:5px 25px 5px 0px;
+      }
+    </style>
+
+  	<title>Intro to Leaflet</title>
+   	<!-- the Leaflet CSS -->
+  	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+  	<!-- the Leaflet JavaScript library -->
+  	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  	<!-- the Leaflet geoJSON Querying library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<!-- the Leaflet Legend library -->
+    <script src= "https://cdn.jsdelivr.net/npm/leaflet-legend@1.0.2/leaflet-legend.min.js"></script>
+  </head>
+
+  <body>
+    <p> <br> </p>
+    <h1 style="color:brown;text-align:center;">Latest Earthquakes (Past 24 Hours)</h1>
+    	<!-- code where we create and name the container that holds the map -->
+  	<div id="map" style="height: 80%"></div>
+    	<!-- code where we build the map and its functionality -->
+    <p>This map depicts all earthquakes worldwide that have occurred in the past 24 hours. Data comes from the <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">USGS Live Earthquake Feed</a> and is updated every minute. Earthquakes are visualized with proportional symbols where earthquakes of larger magnitude are depicted with larger circle markers. Click on a marker for more information about the earthquake.</p>
+    <p>The Pacific Northwest lies along the Cascadia fault. Tectonic activity along this fault could cause a catastrophic earthquake that would produce major damage throughout our region. Learn about how researchers at the University of Washington are modelling earthquake risk and preparing for disaster response at the <a href="https://hazards.uw.edu/geology/m9/">M9 Project</a>.</p>
+
+    <div id="legend">
+		  <h3><center>Earthquake magnitude</center></h3>
+		  <ul style="list-style-type:none">
+			  <li>
+			  	<svg width="24" height="24">
+				  	<circle cx="12" cy="20" r="2" stroke="red" stroke-width="3" fill="red" fill-opacity=".4"/>
+			  	</svg>
+			  	<text>Less than 1</text>
+		   	</li>
+			  <li>
+				  <svg width="24" height="24">
+				  	<circle cx="12" cy="18" r="4" stroke="red" stroke-width="3" fill="red" fill-opacity=".4"/>
+			  	</svg>
+				  <text>Between 1 and 2.5</text>
+			  </li>
+			  <li>
+				  <svg width="24" height="24">
+				  	<circle cx="12" cy="14" r="6" stroke="red" stroke-width="3" fill="red" fill-opacity=".4"/>
+			  	</svg>
+			  	<text>Between 2.5 and 4.5</text>
+		  	</li>
+			  <li>
+			  	<svg width="24" height="24">
+				  	<circle cx="12" cy="12" r="10" stroke="red" stroke-width="3" fill="red" fill-opacity=".4"/>
+			  	</svg>
+				  <text x="0" y="0)">Greater than 4.5</text>
+		  	</li>
+	  	</ul>
+	  </div>
+
+  	<script>
+  		var mymap = L.map('map').setView([47.258, -122.465], 4);
+  		var basemap = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {
+  			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  		}).addTo(mymap);
+  		var point = L.marker([47.258, -122.465]).addTo(mymap);
+  			point.bindPopup("<b>Hello world!</b><br>I am a popup.");
+        // load GeoJSON from an external file and add it to the map
+        $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",function(data){
+        	// add GeoJSON layer to the map once the file is loaded
+        		L.geoJson(data, {
+        			pointToLayer: function(feature, latlng){
+                  var radiusSize,
+        			   	mag = feature.properties.mag;
+                  if (mag > 4.5) radiusSize = 10;
+        				  else if ( mag > 2.5) radiusSize = 6;
+                  else if (mag > 1) radiusSize = 4;
+        					else radiusSize = 2;
+                  var marker = L.circleMarker(latlng, {radius: radiusSize, color: 'red'});
+        				  marker.bindPopup("Location: " + feature.properties.place + "<br>Magnitude: " + feature.properties.mag + "<br><a href =" + feature.properties.url +">More info</a>");
+        				  return marker;
+        			  }
+        		}).addTo(mymap);
+        });
+
+        var Legend =  new L.Control.Legend({
+        position: 'bottomright',
+        });
+        mymap.addControl(Legend);
+        $(".legend-container").append( $("#legend") )
+
+    	</script>
+  </body>
+
+</html>
