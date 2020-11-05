@@ -1,0 +1,153 @@
+<!-- Eric Anderson -->
+<!-- TGIS 503 -->
+<!-- Lab 2 Part 2 -->
+<!-- lab2_2.html -->
+
+<DOCTYPE html>
+<html>
+
+  <head>
+    <title>Lab 2, Part 2 - Leaflet</title>
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+
+    <!-- the Leaflet JavaScript and geoJSON Querying libraries -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- the Leaflet Legend library -->
+    <script src= "https://cdn.jsdelivr.net/npm/leaflet-legend@1.0.2/leaflet-legend.min.js"></script>
+
+    <!-- ESRI Leaflet basemap plugin -->
+    <script src="https://unpkg.com/esri-leaflet@2.5.1/dist/esri-leaflet.js"></script>
+
+    <!-- Leaflet Fullscreen plugin -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+  </head>
+
+  </body>
+    <p> <br> </p> <!-- Title -->
+    <h1> EF1+ Tornadoes (1950-2018) & Tornado Siren Locations </h1>
+    <h2 style="color:green;text-align:center;"> Davidson County, Tennessee </h2>
+    <div id="map"> </div> <!-- Initialize map -->
+
+    <div id="legend"> <!-- Initialize legend -->
+      <h3> <center> &nbsp; &nbsp; &nbsp; &nbsp; Tornado Rating </center> </h3>
+      <ul>
+        <li>
+          <svg width="28" height="25">
+            <circle cx="12" cy="20" r="4" fill="#49FF42" fillColor="#49FF42" fill-opacity="1"/>
+          </svg>
+          <text><b> EF1 </b></text>
+        </li>
+        <li>
+          <svg width="28" height="25">
+            <circle cx="12" cy="20" r="4" fill="#FCFF42" fillColor="#FCFF42" fill-opacity="1"/>
+          </svg>
+          <text><b> EF2 </b></text>
+        </li>
+        <li>
+          <svg width="28" height="25">
+            <circle cx="12" cy="20" r="4" fill="#FF4F38" fillColor="#FF4F38" fill-opacity="1"/>
+          </svg>
+          <text><b> EF3+ </b></text>
+        </li>
+      </ul>
+    </div>
+
+    <div id="b-wrapper" class="leaflet-bar"> <!-- Initialize drop down menu -->
+      <select id="basemaps">
+        <option value="Topographic">Topographic </option>
+        <option value="Streets">Streets </option>
+        <option value="NationalGeographic">National Geographic </option>
+      </select>
+    </div>
+
+    <!-- Description below map -->
+    <p> <br> This map depicts tornadoes paths (colored polylines) rated EF1 or above between the years 1950-2018 in Davidson County, TN. See data sources below. You also see black circles depicting the locations of tornado sirens in Davidson County. Hover over a siren marker to see its address, or click on a tornado path for event data. You may also change the base map layer. </p>
+    <p> <br> Tornadoes are among the greatest natural disaster threats in Tennessee, and could form during severe weather without much warning. Sirens are strategically scattered throughout the region to further ensure that the public is aware of tornadic threats. </p>
+
+    <!-- Script section -->
+    <!-- Import my three local geoJSON files -->
+    <script src="Tornado_Siren_Locations.geojson"></script>
+    <script src="torn_path_1950_2018.geojson"></script>
+    <script src="dav_county.geojson"></script>
+
+    <script>
+      var e_map = L.map('map').setView([36.1927, -86.7216], 10);
+      e_map.addControl(new L.Control.Fullscreen({ // fullscreen plugin use
+          title: {
+              'false': 'View Fullscreen',
+              'true': 'Exit Fullscreen'
+          }}));
+      var layer = L.esri.basemapLayer('Topographic').addTo(e_map); // ESRI basemap plugin use
+
+      L.geoJSON(county, { // symbolize Davidson County
+          style: function(feature) {
+              return {color: "#8f8f8f", fillColor: "#8f8f8f", fillOpacity: 0.6};
+            }}).addTo(e_map);
+
+      L.geoJSON(paths, { // symbolize tornado paths
+          style: function(feature) {
+              switch (feature.properties.mag) {
+                  case 1: return {color: "#49FF42", weight: 4};
+                  case 2: return {color: "#FCFF42", weight: 4};
+                  case 3: return {color: "#FF4F38", weight: 4};
+                  case 4: return {color: "#FF4F38", weight: 4};
+                  case 5: return {color: "#FF4F38", weight: 4};
+              }}, onEachFeature: function (feature, layer) { // assign pop-up data
+                    layer.bindPopup("<h2>" + feature.properties.mo + "/" + feature.properties.dy + "/"
+                                    + feature.properties.yr + "</h2> <b> EF" + feature.properties.mag +
+                                    " Tornado </b> <br> Time of Event: " + feature.properties.time
+                                    + "<br> Injuries: " + feature.properties.inj + "<br> Fatalities: "
+                                    + feature.properties.fat + "<br> Path Distance: "
+                                    + feature.properties.len.toFixed(1) + " miles <br> Tornado Width: "
+                                    + feature.properties.wid + " yards <br>");
+              }}).addTo(e_map);
+
+      L.geoJSON(sirens, { // symbolize siren locations
+          pointToLayer: function (feature, latlng) {
+              var marker = L.circleMarker(latlng, {radius: 1, color: 'black'});
+              marker.bindPopup(feature.properties.Address + "<br>" + feature.properties.City + ", TN  " + feature.properties.Zip);
+              marker.on('mouseover', function (e) { // offer automatic popup functionality
+                this.openPopup(); });
+              marker.on('mouseout', function (e) {
+                this.closePopup(); });
+              return marker
+          }}).addTo(e_map);
+
+      function setBasemap (basemap) { // swap basemaps upon command
+        if (layer) {
+          e_map.removeLayer(layer);
+        }
+        layer = L.esri.basemapLayer(basemap);
+        e_map.addLayer(layer);
+      }
+      document //
+      .querySelector('#basemaps')
+      .addEventListener('change', function (e) {
+        var basemap = e.target.value;
+        setBasemap(basemap);
+      });
+
+      var Legend =  new L.Control.Legend({ // symbolize static legend
+                    position: 'bottomright'});
+                    e_map.addControl(Legend);
+                    $(".legend-container").append($("#legend"))
+      </script>
+
+      <p style="font-size:90%;font-family:Comic;"> <!-- References -->
+        <br> <br> <b> <u> Data Sources: </u> </b> <br>
+            <br> 1.) Tennessee Counties: <a href="https://hub.arcgis.com/datasets/b3b22bda38d54d0686efb4a9d60c8d1b_0"> https://hub.arcgis.com/datasets/b3b22bda38d54d0686efb4a9d60c8d1b_0 </a>
+            <br> &nbsp; &nbsp; - Downloaded as shapefile, converted online to geoJSON, no modification to datasets.
+            <br> 2.) Tornado Siren Location: <a href="https://data.nashville.gov/Emergency-Management/Tornado-Siren-Locations/736j-2drk"> https://data.nashville.gov/Emergency-Management/Tornado-Siren-Locations/736j-2drk </a>
+            <br> &nbsp; &nbsp; - Exported as CSV file, converted online to geoJSON, modified latitude and longitude data to accomodate geoJSON format.
+            <br> 3.) Tornado Paths: <a href="https://www.spc.noaa.gov/gis/svrgis/"> https://www.spc.noaa.gov/gis/svrgis/ </a>
+            <br> &nbsp; &nbsp; - Downloaded as SHP file. Converted to feature in ArcGIS Pro. Geoprocessed to confine data to Davidson County. Exported to geoJSON. </p>
+      <p> <br> </p>
+      <center> <p style="font-size:85%;font-family:Comic"> <b> Eric Anderson </b> <a href="https://ermian98-uw.github.io/GIS/welcome.html"> <br> Back to my Welcome page <br> &nbsp; </a> </p> </center>
+  </body>
+
+</html>
