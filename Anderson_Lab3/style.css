@@ -1,0 +1,66 @@
+/* Eric Anderson */
+/* TGIS 503 */
+/* Lab 2 Part 2 */
+/* style.css */
+
+/* Selectors are in alphabetical order */
+
+  #b-wrapper {
+    background: white;
+    border: ridge;
+    border-color: gray;
+    border-width: 2px;
+    margin: auto;
+    padding: 10px;
+    width:88%;
+  }
+
+  body {
+    background-color: #CBD6CE;
+    font-family: "Palatino Linotype", sans-serif;
+    margin: auto;
+    max-width: 900px;
+  }
+
+  h1 {
+    background-color:#EEEEEE;
+    color:green;
+    font-size:200%;
+    text-align:center;
+  }
+
+  h3 {
+    color: white;
+  }
+
+  #legend {
+    background: white;
+    background-color: #474C82;
+    border: solid;
+    border-width: 4px;
+    line-height: 0px;
+    opacity: 0.92;
+    padding:5px 25px 5px 0px;
+  }
+
+  #map {
+    border: ridge;
+    border-color: gray;
+    border-width: 4px;
+    height:65%;
+    margin:auto;
+    width:90%;
+  }
+
+  p {
+    margin: auto;
+    max-width: 820px;
+  }
+
+  text {
+    color: white;
+  }
+
+  ul {
+    list-style-type: none;
+  }

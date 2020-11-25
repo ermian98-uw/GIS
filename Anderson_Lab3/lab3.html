@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<!-- Eric Anderson -->
+<!-- TGIS 503 -->
+<!-- Lab 3 -->
+<!-- lab3.html -->
+
+<html>
+  <head>
+    <title>Lab 3 - Mapbox</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <!-- insert Mapbox GL library links here -->
+
+		<script type='text/javascript' src='https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TyZRjTrLBW0ttWqVVFcf_da7oyw3rR9vbYcD5OQoLp3UJbbarDbKf83aCH2xps_ddG62VhIPl6U5uucr1utttBPNYr_kW0uS1tYEtbO1ROx3_0WsZkaH5NUqUJf7ZyWVstvZDQoBeTnYJoL9TkbmW6XFIa9oCHYC2QouoFmD7gQtdwJW5qS-Phz1D16hfNBqtEeJks1ks9_z2v6NgmKba62hLglP4DK-LIUcCsGsGsZZV_FQLdHCDc012nzDQXPKK-_baTlMDBFFIBd74RfQ5Xx6N1e7K5-ddTX7tfxHOEYJ52o4_1aM78LaSXuQJMV8xFxejbAF0P5rZBYw3oHIG1vl9dEganbJ5gxfzzIbkoNu49vAm8Kr8a9knJuFbgHH90U_vvaODcnbwGsBNtokjhDUUdIIVbx53sJQg2PnbKRSe5KhW_2ClHUA2E3-j3nuX5nqlOQfZwoTCilbkx-1z6CideEUCNCDC4X_Aa85iKwDMvmf6RjYxASVj2VfQitJMOXGlS5xiUJ88Qw-xf3HdSwymCmIsWD2kKHIAXTokwY4YcQLLVX5CkWcBMHiutbfjoAxGWIM6wyBfqrlR_an8BJ4IHyxW5AW0AzHvAZgO0x6s4BzR9FJ2mjd_Rpx1iftVfRYgXX11Te-c7BHT6ni8Ty-sOcBb6DXfnUBhJF6RFk' charset='UTF-8'> </script>
+
+    <!-- the Leaflet JavaScript and geoJSON Querying libraries -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <!-- create div for the map here -->
+    <!-- JS code for the map goes here -->
+
+    <p> <br> </p> <!-- Title -->
+    <h1> EF1+ Tornadoes (1950-2018) & Tornado Siren Locations </h1>
+    <h2 style="color:green;text-align:center;"> Davidson County, Tennessee </h2>
+    <div id="map"> </div> <!-- Initialize map -->
+
+
+    <!-- Description below map -->
+    <p> <br> This map depicts tornadoes paths (colored polylines) rated EF1 or above between the years 1950-2018 in Davidson County, TN. See data sources below. You also see black circles depicting the locations of tornado sirens in Davidson County. Hover over a siren marker to see its address, or click on a tornado path for event data. You may also change the base map layer. </p>
+    <p> <br> Tornadoes are among the greatest natural disaster threats in Tennessee, and could form during severe weather without much warning. Sirens are strategically scattered throughout the region to further ensure that the public is aware of tornadic threats. </p>
+
+    <script>
+			mapboxgl.accessToken = 'pk.eyJ1IjoiZXJtaWFuOTgiLCJhIjoiY2tod3I5NGozMXloczJ1bWpoMWtmeDR1YyJ9.em9VpowzKU06_3X8u-Gz2g';
+
+			var map = new mapboxgl.Map({
+			  container: // HTML container id
+			  style:  // style URL
+			  center: // starting position as [lng, lat]
+			  zoom:// starting zoom
+			});
+
+//Custom pop-up
+			// var popup = new mapboxgl.Popup()
+			//     .setHTML('text of popup goes here');
+			//
+			// var marker = new mapboxgl.Marker()
+			// 	.setLngLat([-21.9270884, 64.1436456])
+			// 	.setPopup(popup)
+			// 	.addTo(map);
+
+//Add GeoJSON layer
+//on map load, run function to load the geojson
+			// map.on('load', function(){
+			// 	//add a source layer for earthquakes
+			// 	map.addSource('earthquakes', {
+			// 				"type": "geojson",
+			// 				"data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+			// 		});
+			// 		//add the earthquakes to the map
+			// 		map.addLayer({
+			// 			"id":"equakes",
+			// 			"type":"circle",
+			// 			"source":"earthquakes"
+			// 		});
+			// });
+		</script>
+
+      <p style="font-size:90%;font-family:Comic;"> <!-- References -->
+        <br> <br> <b> <u> Data Sources: </u> </b> <br>
+            <br> 1.) Tennessee Counties: <a href="https://hub.arcgis.com/datasets/b3b22bda38d54d0686efb4a9d60c8d1b_0"> https://hub.arcgis.com/datasets/b3b22bda38d54d0686efb4a9d60c8d1b_0 </a>
+            <br> &nbsp; &nbsp; - Downloaded as shapefile, converted online to geoJSON, no modification to datasets.
+            <br> 2.) Tornado Siren Location: <a href="https://data.nashville.gov/Emergency-Management/Tornado-Siren-Locations/736j-2drk"> https://data.nashville.gov/Emergency-Management/Tornado-Siren-Locations/736j-2drk </a>
+            <br> &nbsp; &nbsp; - Exported as CSV file, converted online to geoJSON, modified latitude and longitude data to accomodate geoJSON format.
+            <br> 3.) Tornado Paths: <a href="https://www.spc.noaa.gov/gis/svrgis/"> https://www.spc.noaa.gov/gis/svrgis/ </a>
+            <br> &nbsp; &nbsp; - Downloaded as SHP file. Converted to feature in ArcGIS Pro. Geoprocessed to confine data to Davidson County. Exported to geoJSON. </p>
+      <p> <br> </p>
+      <center> <p style="font-size:85%;font-family:Comic"> <b> Eric Anderson </b> <a href="https://ermian98-uw.github.io/GIS/welcome.html"> <br> Back to my Welcome page <br> &nbsp; </a> </p> </center>
+  </body>
+
+</html>
