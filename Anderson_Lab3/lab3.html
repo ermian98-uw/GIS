@@ -31,22 +31,22 @@
     <h1> Monthly Average Precipitation and Temperature in Texas by County, 1999 </h1>
 
     <!-- Menus for each map, initailized -->
-    <center> <button class="collapsible" style="color:blue"> <b> Precipitation </b> </button>
+    <center> <button class="collapsible" style="color:#0B38DB"> <b> Precipitation </b> </button>
     <div class="content">
     <div id="map1"> </div> <!-- Initialize map1 -->
-      <p> Yes. </p>
+      <p> Precipitation values (inches). Hover or click at whim! </p>
     </div> </center>
     <p> <br> </p>
     <center> <button class="collapsible" style="color:orange"> <b> Temperature </b> </button>
     <div class="content">
       <div id="map2"> </div> <!-- Initialize map2 -->
-      <p> Yes. </p>
+      <p> Temperature values (Fahrenheit). Hover or click at whim! </p>
     </div> </center>
 
 
     <!-- Description below map -->
     <p> <br> These choropleth maps depict the mean monthly precipitation and temperatures for each Texas county in 1999. Many thanks to the NCDC for provided the extensive data source below. You also see the geographic center of Texas displayed. </p>
-    <p> <br> Tornadoes are among the greatest natural disaster threats in Tennessee, and could form during severe weather without much warning. Sirens are strategically scattered throughout the region to further ensure that the public is aware of tornadic threats. </p>
+    <p> <br> I am submitting so many weather-related maps for these labs because my Capstone project will liekly revolve around the remote sensing of temperature across various land surfaces. </p>
 
     <script>
 			mapboxgl.accessToken = "pk.eyJ1IjoiZXJtaWFuOTgiLCJhIjoiY2tnaXVwYWtrMGEwbjJ1cGRlZDQ2bmd1OCJ9.gy2NOY8e3cmhzG6JiEyj4A";
@@ -54,13 +54,13 @@
 			  container: "map1",
 			  style: "mapbox://styles/ermian98/ckhws5qm105i819phtroyx21o", // import custom style
 			  center: [-99.1704,31.3912],
-			  zoom: 5
+			  zoom: 4.6
 			});
       var map2 = new mapboxgl.Map({
         container: "map2",
         style: "mapbox://styles/ermian98/ckhws5qm105i819phtroyx21o", // import custom style
         center: [-99.1704,31.3912],
-        zoom: 5
+        zoom: 4.6
       });
 
 //Custom pop-up
@@ -90,8 +90,8 @@
           "type":"fill",
 					"source": "counties",
           'paint': {
-            'fill-color': "gray",
-            'fill-opacity': 0.9
+            'fill-color': "rgb(200, 150, 30)",
+            'fill-opacity': ["/",1,["number", ["get","Jan-1999"],0.5]]
           }
 				});
 			});
@@ -113,7 +113,7 @@
           }
         });
       });
-      
+
       // collapsible menu code
       var coll = document.getElementsByClassName("collapsible");
       var i;
