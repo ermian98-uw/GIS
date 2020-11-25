@@ -1,6 +1,6 @@
 /* Eric Anderson */
 /* TGIS 503 */
-/* Lab 2 Part 2 */
+/* Lab 3 */
 /* style.css */
 
 /* Selectors are in alphabetical order */
@@ -43,11 +43,10 @@
     padding:5px 25px 5px 0px;
   }
 
-  #map {
+  #map1 {
     border: ridge;
-    border-color: gray;
+    border-color: white;
     border-width: 4px;
-    height:65%;
     margin:auto;
     width:90%;
   }
