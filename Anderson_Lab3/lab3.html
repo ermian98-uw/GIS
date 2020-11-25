@@ -20,22 +20,32 @@
     <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TyZRjTrLBW0ttWqVVFcf_da7oyw3rR9vbYcD5OQoLp3UJbbarDbKf83aCH2xps_ddG62VhIPl6U5uucr1utttBPNYr_kW0uS1tYEtbO1ROx3_0WsZkaH5NUqUJf7ZyWVstvZDQoBeTnYJoL9TkbmW6XFIa9oCHYC2QouoFmD7gQtdwJW5qS-Phz1D16hfNBqtEeJks1ks9_z2v6NgmKba62hLglP4DK-LIUcCsGsGsZZV_FQLdHCDc012nzDQXPKK-_baTlMDBFFIBd74RfQ5Xx6N1e7K5-ddTX7tfxHOEYJ52o4_1aM78LaSXuQJMV8xFxejbAF0P5rZBYw3oHIG1vl9dEganbJ5gxfzzIbkoNu49vAm8Kr8a9knJuFbgHH90U_vvaODcnbwGsBNtokjhDUUdIIVbx53sJQg2PnbKRSe5KhW_2ClHUA2E3-j3nuX5nqlOQfZwoTCilbkx-1z6CideEUCNCDC4X_Aa85iKwDMvmf6RjYxASVj2VfQitJMOXGlS5xiUJ88Qw-xf3HdSwymCmIsWD2kKHIAXTokwY4YcQLLVX5CkWcBMHiutbfjoAxGWIM6wyBfqrlR_an8BJ4IHyxW5AW0AzHvAZgO0x6s4BzR9FJ2mjd_Rpx1iftVfRYgXX11Te-c7BHT6ni8Ty-sOcBb6DXfnUBhJF6RFk" charset="UTF-8"></script>
 
     <style>
-      #map1 {height: 75vh; top: 0; bottom: 0;}
-      #map2 {height: 75vh; top: 0; bottom: 0;}
+      #map1 {height: 70vh; top: 0; bottom: 0;}
+      #map2 {height: 70vh; top: 0; bottom: 0;}
     </style>
 
   </head>
 
   <body>
     <p> <br> </p> <!-- Title of page -->
-    <h1> Monthly Average Precipitation and Temperature by County </h1>
-    <h2 style="color:green;text-align:center;"> Texas, 1999-2019  </h2>
+    <h1> Monthly Average Precipitation and Temperature in Texas by County, 1999 </h1>
+
+    <!-- Menus for each map, initailized -->
+    <center> <button class="collapsible" style="color:blue"> <b> Precipitation </b> </button>
+    <div class="content">
     <div id="map1"> </div> <!-- Initialize map1 -->
+      <p> Yes. </p>
+    </div> </center>
     <p> <br> </p>
-    <div id="map2"> </div> <!-- Initialize map2 -->
+    <center> <button class="collapsible" style="color:orange"> <b> Temperature </b> </button>
+    <div class="content">
+      <div id="map2"> </div> <!-- Initialize map2 -->
+      <p> Yes. </p>
+    </div> </center>
+
 
     <!-- Description below map -->
-    <p> <br> These choropleth maps depict the mean monthly precipitation and temperatures for each Texas county between 1999 and 2019. Many thanks to the NCDC for provided the extensive data source below. You also see the geographic center of Texas displayed. Black circles depicting the locations of tornado sirens in Davidson County. Hover over a siren marker to see its address, or click on a tornado path for event data. You may also change the base map layer. </p>
+    <p> <br> These choropleth maps depict the mean monthly precipitation and temperatures for each Texas county in 1999. Many thanks to the NCDC for provided the extensive data source below. You also see the geographic center of Texas displayed. </p>
     <p> <br> Tornadoes are among the greatest natural disaster threats in Tennessee, and could form during severe weather without much warning. Sirens are strategically scattered throughout the region to further ensure that the public is aware of tornadic threats. </p>
 
     <script>
@@ -67,25 +77,65 @@
           .setPopup(popup2)
           .addTo(map2);
 
-//Add GeoJSON layer. On map load, run function to load the geojson
-			map1.on('load', function(){ // currently placeholder
-				//add a source layer for earthquakes
-				map1.addSource('earthquakes', {
+      // Add GeoJSON layers
+			map1.on('load', function(){
+				//add a source layer
+        var counties = "TX_counties.geojson"
+				map1.addSource("counties", {
 							"type": "geojson",
-							"data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+							"data": "https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab3/TX_counties.geojson"
 					});
-					//add the earthquakes to the map
-					map1.addLayer({
-						"id":"equakes",
-						"type":"circle",
-						"source":"earthquakes"
-					});
+				map1.addLayer({
+					"id":"counties",
+          "type":"fill",
+					"source": "counties",
+          'paint': {
+            'fill-color': "gray",
+            'fill-opacity': 0.9
+          }
+				});
 			});
+
+      map2.on('load', function(){
+        //add a source layer
+        var counties = "TX_counties.geojson"
+        map2.addSource("counties", {
+              "type": "geojson",
+              "data": "https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab3/TX_counties.geojson"
+          });
+        map2.addLayer({
+          "id":"counties",
+          "type":"fill",
+          "source": "counties",
+          'paint': {
+            'fill-color': "gray",
+            'fill-opacity': 0.9
+          }
+        });
+      });
+      
+      // collapsible menu code
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
+      }
 		</script>
 
       <p style="font-size:90%;font-family:Comic;"> <!-- References -->
-        <br> <br> <b> <u> Data Source: </u> </b> <br>
+        <br> <br> <b> <u> Data Sources: </u> </b> <br>
             <br> - Climate Data provided by the NCDC (National Centers for Environmental Information) at the following URL: <a href="https://www.ncdc.noaa.gov/cag/county/mapping/"> https://www.ncdc.noaa.gov/cag/county/mapping/</a>. Data was downloaded as a comma-separated file. Temporal information was modified in order to convert to a geoJSON file online. No other modifications were made to the dataset.
+            <br> <br> - Texas Counties GEOJSON: <a href="https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa"> https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa</a>.
+      <p> <br> </p>
       <p> <br> </p>
       <center> <p style="font-size:85%;font-family:Comic"> <b> Eric Anderson </b> <a href="https://ermian98-uw.github.io/GIS/welcome.html"> <br> Back to my Welcome page <br> &nbsp; </a> </p> </center>
       <p> <br> </p>
