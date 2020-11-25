@@ -3,7 +3,11 @@
 /* Lab 3 */
 /* style.css */
 
-/* Selectors are in alphabetical order */
+/* Selectors are in alphabetical order */4
+
+   .active:hover {
+     background-color: #666;
+   }
 
   #b-wrapper {
     background: white;
@@ -19,12 +23,34 @@
     background-color: #7BBDBF;
     font-family: "Palatino Linotype", sans-serif;
     margin: auto;
-    max-width: 900px;
+    max-width: 950px;
   }
 
+  .collapsible {
+  background-color: #777;
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border: solid;
+  border-width: 3px;
+  font-size: 15px;
+}
+
+  .collapsible:hover {
+    background-color: #666;
+  }
+
+  .content {
+  width: 90%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  background-color: #F1f1f1;
+}
+
   h1 {
-    background-color:#EEEEEE;
-    color:green;
+    background-color:#7BCFEF;
+    color: #3D0D70;
     font-size:200%;
     text-align:center;
   }
@@ -48,8 +74,8 @@
     border-color: white;
     border-width: 4px;
     margin:auto;
-    padding: 20px;
-    width:80%;
+    padding: 10px;
+    width: 85%;
   }
 
   #map2 {
@@ -57,8 +83,8 @@
     border-color: white;
     border-width: 4px;
     margin:auto;
-    padding: 20px;
-    width:80%;
+    padding: 10px;
+    width: 85%;
   }
 
   p {
@@ -68,8 +94,4 @@
 
   text {
     color: white;
-  }
-
-  ul {
-    list-style-type: none;
   }
