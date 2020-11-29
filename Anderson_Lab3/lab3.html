@@ -133,7 +133,7 @@
         map1.addLayer({
 					"id":"counties1",
           "type":"fill",
-					"source": "counties",
+					"source": "counties_P",
           'paint': {
             'fill-color': "rgb(230, 181, 58)", // base color (dryest counties, covers basemap)
             'fill-opacity': 1
@@ -142,7 +142,7 @@
         map1.addLayer({
           "id":"counties2",
           "type":"fill",
-          "source": "counties",
+          "source": "counties_P",
           'paint': {
             'fill-color': "rgb(0, 181, 58)", // amount of rainfall dictates opacity of green
             'fill-opacity': ['/',['+',1,['number', ['get', mystring],0]],3]
@@ -151,7 +151,7 @@
         map1.addLayer({
           "id":"counties3",
           "type":"fill",
-          "source": "counties",
+          "source": "counties_P",
           'paint': {
             'fill-color': "rgb(0, 0, 0)", // hover layer
             'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.5,0]
@@ -160,7 +160,7 @@
         map1.addLayer({
           "id":"counties_bord1",
           "type":"line",
-          "source": "counties",
+          "source": "counties_P",
           'paint': {
             'line-color': "rgb(0, 0, 0)", // county borders
             'line-width': 0.75
@@ -171,10 +171,10 @@
 
       // Add GeoJSON layers (this loads the map without layers, adjusting the slider activites layering)
 			map1.on('load', function(){ // map with precip values
-				var counties = "TX_counties.geojson"; // GEOJSON file from GitHub
-				map1.addSource("counties", {
+				var counties_P = "TX_counties.geojson"; // GEOJSON file from GitHub
+				map1.addSource("counties_P", {
 							"type": "geojson",
-							"data": "counties",
+							"data": "TX_counties.geojson",
               'generateId': true
 					});
 			});
@@ -222,7 +222,7 @@
         map2.addLayer({
           "id":"counties4",
           "type":"fill",
-          "source": "counties",
+          "source": "counties_T",
           'paint': {
             'fill-color': "rgb(61, 113, 245)", // base color (coldest counties, covers basemap)
             'fill-opacity': 1
@@ -231,7 +231,7 @@
         map2.addLayer({
           "id":"counties5",
           "type":"fill",
-          "source": "counties",
+          "source": "counties_T",
           'paint': {
             'fill-color': "rgb(236, 245, 61)",  // magnitude of temperature dictates opacity of yellow
             'fill-opacity': ['/',['-',['number', ['get', mystring],0],35],50]
@@ -240,7 +240,7 @@
         map2.addLayer({
           "id":"counties6",
           "type":"fill",
-          "source": "counties",
+          "source": "counties_T",
           'paint': {
             'fill-color': "rgb(0, 0, 0)", // hover layer
             'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.5,0]
@@ -249,7 +249,7 @@
         map2.addLayer({
           "id":"counties_bord2",
           "type":"line",
-          "source": "counties",
+          "source": "counties_T",
           'paint': {
             'line-color': "rgb(0, 0, 0)", // county borders
             'line-width': 0.75
@@ -260,10 +260,10 @@
 	
       // Add GeoJSON layers (this loads the map without layers, adjusting the slider activites layering)
       map2.on('load', function(){ // map with temp values
-	var counties = "TX_counties.geojson"; // GEOJSON file from GitHub
-        map2.addSource("counties", {
+	var counties_T = "TX_counties.geojson"; // GEOJSON file from GitHub
+        map2.addSource("counties_T", {
               "type": "geojson",
-              "data": "counties",
+              "data": "TX_counties.geojson",
               'generateId': true
           });
   			});
@@ -336,13 +336,13 @@
           if (e.features.length > 0) {
             if (hoveredStateId) {
               map1.removeFeatureState({
-                source: "counties",
+                source: "counties_P",
                 id: hoveredStateId
               });
             }
             hoveredStateId = e.features[0].id;
             map1.setFeatureState({
-              source: 'counties',
+              source: 'counties_P',
               id: hoveredStateId,
             }, { hover: true });
           }
@@ -350,7 +350,7 @@
         map1.on("mouseleave", "counties3", function() {
           if (hoveredStateId) {
             map1.setFeatureState({
-              source: 'counties',
+              source: 'counties_P',
               id: hoveredStateId
             }, { hover: false });
           }
@@ -362,13 +362,13 @@
           if (e.features.length > 0) {
             if (hoveredStateId2) {
               map2.removeFeatureState({
-                source: "counties",
+                source: "counties_T",
                 id: hoveredStateId2
               });
             }
             hoveredStateId2 = e.features[0].id;
             map2.setFeatureState({
-              source: 'counties',
+              source: 'counties_T',
               id: hoveredStateId2,
             }, { hover: true });
           }
@@ -376,7 +376,7 @@
         map2.on("mouseleave", "counties6", function() {
           if (hoveredStateId2) {
             map2.setFeatureState({
-              source: 'counties',
+              source: 'counties_T',
               id: hoveredStateId2
             }, { hover: false });
           }
