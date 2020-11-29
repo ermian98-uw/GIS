@@ -106,8 +106,7 @@
         .setLngLat([-99.1704,31.3912])
         .addTo(map2);
       var mystring = "PJan_1999";
-      var counties = "TX_counties.geojson"; // GEOJSON file from GitHub
-
+      
       document.getElementById('slider1').addEventListener('input', function(e) {
         var month = parseInt(e.target.value);
         var m_dis = " ";
@@ -170,8 +169,9 @@
         document.getElementById('a_month1').innerText = m_dis;  // update text in the slider UI
       });
 
-      // Add GeoJSON layers (this makes )
+      // Add GeoJSON layers (this loads the map without layers, adjusting the slider activites layering)
 			map1.on('load', function(){ // map with precip values
+				var counties = "TX_counties.geojson"; // GEOJSON file from GitHub
 				map1.addSource("counties", {
 							"type": "geojson",
 							"data": "counties",
@@ -257,8 +257,10 @@
         });
         document.getElementById('a_month2').innerText = m_dis;  // update text in the slider UI
       });
-
+	
+      // Add GeoJSON layers (this loads the map without layers, adjusting the slider activites layering)
       map2.on('load', function(){ // map with temp values
+	var counties = "TX_counties.geojson"; // GEOJSON file from GitHub
         map2.addSource("counties", {
               "type": "geojson",
               "data": "counties",
