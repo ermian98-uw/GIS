@@ -287,30 +287,44 @@
         // custom popups for county and precipitation information on map 1
         map1.on('click', 'counties3', function (e) {
           var type = e.features[0].properties.PJan_1999;
-          if (mystring.equals("PFeb_1999")) {
+          if (mystring.includes("PFeb_1999")) {
             type = e.features[0].properties.PFeb_1999;
-          } else if (mystring.equals("PMar_1999")) { type = e.features[0].properties.PMar_1999;
-          } else if (mystring.equals("PApr_1999")) { type = e.features[0].properties.PApr_1999;
-          } else if (mystring.equals("PMay_1999")) { type = e.features[0].properties.PMay_1999;
-          } else if (mystring.equals("PJun_1999")) { type = e.features[0].properties.PJun_1999;
-          } else if (mystring.equals("PJul_1999")) { type = e.features[0].properties.PJul_1999;
-          } else if (mystring.equals("PAug_1999")) { type = e.features[0].properties.PAug_1999;
-          } else if (mystring.equals("PSep_1999")) { type = e.features[0].properties.PSep_1999;
-          } else if (mystring.equals("POct_1999")) { type = e.features[0].properties.POct_1999;
-          } else if (mystring.equals("PNov_1999")) { type = e.features[0].properties.PNov_1999;
-          } else if (mystring.equals("PDec_1999")) { type = e.features[0].properties.PDec_1999;
+          } else if (mystring.includes("PMar_1999")) { type = e.features[0].properties.PMar_1999;
+          } else if (mystring.includes("PApr_1999")) { type = e.features[0].properties.PApr_1999;
+          } else if (mystring.includes("PMay_1999")) { type = e.features[0].properties.PMay_1999;
+          } else if (mystring.includes("PJun_1999")) { type = e.features[0].properties.PJun_1999;
+          } else if (mystring.includes("PJul_1999")) { type = e.features[0].properties.PJul_1999;
+          } else if (mystring.includes("PAug_1999")) { type = e.features[0].properties.PAug_1999;
+          } else if (mystring.includes("PSep_1999")) { type = e.features[0].properties.PSep_1999;
+          } else if (mystring.includes("POct_1999")) { type = e.features[0].properties.POct_1999;
+          } else if (mystring.includes("PNov_1999")) { type = e.features[0].properties.PNov_1999;
+          } else if (mystring.includes("PDec_1999")) { type = e.features[0].properties.PDec_1999;
           }
           new mapboxgl.Popup()
           .setLngLat(e.lngLat)
-          .setHTML("<b>" + e.features[0].properties.PJan_1999 + " County" + "</b> <br>")
+          .setHTML("<b>" + e.features[0].properties.name + " County:" + "</b> <br> " + type + " inches of rain in " + mystring.substring(1,4) + " " + mystring.substring(5,9))
           .addTo(map1);
         });
 
         // custom popups for county and temperature information on map 2
         map2.on('click', 'counties6', function (e) {
+          var type = e.features[0].properties.TJan_1999;
+          if (mystring.includes("TFeb_1999")) {
+            type = e.features[0].properties.PFeb_1999;
+          } else if (mystring.includes("TMar_1999")) { type = e.features[0].properties.TMar_1999;
+          } else if (mystring.includes("TApr_1999")) { type = e.features[0].properties.TApr_1999;
+          } else if (mystring.includes("TMay_1999")) { type = e.features[0].properties.TMay_1999;
+          } else if (mystring.includes("TJun_1999")) { type = e.features[0].properties.TJun_1999;
+          } else if (mystring.includes("TJul_1999")) { type = e.features[0].properties.TJul_1999;
+          } else if (mystring.includes("TAug_1999")) { type = e.features[0].properties.TAug_1999;
+          } else if (mystring.includes("TSep_1999")) { type = e.features[0].properties.TSep_1999;
+          } else if (mystring.includes("TOct_1999")) { type = e.features[0].properties.TOct_1999;
+          } else if (mystring.includes("TNov_1999")) { type = e.features[0].properties.TNov_1999;
+          } else if (mystring.includes("TDec_1999")) { type = e.features[0].properties.TDec_1999;
+          }
           new mapboxgl.Popup()
           .setLngLat(e.lngLat)
-          .setHTML("<b>" + e.features[0].properties.name + " County" + "</b>")
+          .setHTML("<b>" + e.features[0].properties.name + " County:" + "</b> <br> " + type + "\u00B0F mean temperature in " + mystring.substring(1,4) + " " + mystring.substring(5,9))
           .addTo(map2);
         });
 
