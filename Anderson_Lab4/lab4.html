@@ -8,7 +8,6 @@
 <html>
   <head> <!-- Head -->
     <title> Lab 4 - Storytelling Through Maps </title>
-
     <!-- CSS Styles -->
     <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -22,58 +21,99 @@
 
   <body>
     <p> <br> </p> <!-- Title of page -->
-    <h1> Examining Texas Climate in 1999 </h1>
+    <h1 style="font-variant:small-caps;"> Examining Texas Climate in 1999 </h1>
+    <center> <p style="font-size:185%;font-variant:small-caps;padding-bottom:30px;border-bottom:solid;border-bottom-style:double;border-bottom-width:6px;border-color:lime;font-family:"Monaco",fantasy;width:65%;"> <br> Eric Anderson </p> </center>
     <p> <br> </p>
-    <p style="text-align:center;"> <b> Click on a button below to reveal a map. </b> </p>
+    <p> <br> </p>
+    <p style="text-align:center;font-size:130%;"> <b> Click on a button below to reveal a map. </b> </p>
     <p> <br> </p>
 
     <!-- Menus for each map, initailized -->
+    <center> <button class="collap" style="color:#785C0E"> <b> Temperature </b> </button>
+      <div class="content">
+        <p> <br> </p>
+        <div id="map2"> </div> <!-- Initialize map2 and legend2 -->
+        <div id='time_series'>
+          <h1 style="background:rgb(250, 130, 100);color:black;font-size:180%;">Month</h1>
+          <div class='session' style="background:linear-gradient(to left, #7BBDBF, #90E5E8);" id='sliderbar2'>
+            <h2><label id='a_month2'>Jan</label> 1999</h2>
+            <input id='slider2' class='row' type='range' min='0' max='11' step='1' value='0'/>
+            <div>
+              <a href="javascript:void(0);"> <div id="button21">
+              <img src="https://cdn3.iconfinder.com/data/icons/photo-12/500/842-512.png"
+                alt="Play"
+                style="width:50px;
+                align:center"/> </div> </a>
+              <a href="javascript:void(0);"> <div id="button22">
+                <img src="https://cdn0.iconfinder.com/data/icons/vector-basic-tab-bar-icons/48/pause_button-512.png"
+                  alt="Pause"
+                  style="width:50px;
+                  align:center"/> </div> </a>
+            </div>
+          </div>
+        </div>
+        <p> <br> </p>
+        <div class='map-overlay2' id='legend2'></div>
+        <h5> Temperature values (Fahrenheit). <br> <br> County border and color determined by its 1999 population estimate. <br> <br> Use the play/pause button to start timelapse. <br> <br> Hover and click (pop-up) functionality. <br> <br> Right-click and drag for 3-D effect. </h5>
+      </div> </center>
+    <p> <br> </p>
     <center> <button class="collap" style="color:#0E0C86"> <b> Precipitation </b> </button>
     <div class="content">
       <p> <br> </p>
       <div id="map1"> </div> <!-- Initialize map1 and legend1 -->
         <div id='time_series'>
-          <h1 style="background:rgb(153, 255, 173);">Month</h1>
+          <h1 style="background:rgb(153, 255, 173);color:black;font-size:180%;">Month</h1>
           <div class='session' style="background:linear-gradient(to left, #7BBDBF, #90E5E8);" id='sliderbar1'>
             <h2><label id='a_month1'>Jan</label> 1999</h2>
             <input id='slider1' class='row' type='range' min='0' max='11' step='1' value='0'/>
+            <div>
+              <a href="javascript:void(0);"> <div id="button11">
+              <img src="https://cdn3.iconfinder.com/data/icons/photo-12/500/842-512.png"
+                alt="Play"
+                style="width:50px;
+                align:center"/> </div> </a>
+              <a href="javascript:void(0);"> <div id="button12">
+                <img src="https://cdn0.iconfinder.com/data/icons/vector-basic-tab-bar-icons/48/pause_button-512.png"
+                  alt="Pause"
+                  style="width:50px;
+                  align:center"/> </div> </a>
+            </div>
           </div>
         </div>
         <p> <br> </p>
         <div class='map-overlay1' id='legend1'></div>
-          <h5> Precipitation values (inches). Hover and click as much as you'd like! Use the slider to see other months. </h5>
+          <h5> Precipitation values (inches). <br> <br> County border and color determined by its 1999 population estimate. <br> <br> Use the play/pause button to start timelapse. <br> <br> Hover and click (pop-up) functionality. <br> <br> Right-click and drag for 3-D effect. </h5>
         </div> </center>
-    <p> <br> </p>
-    <center> <button class="collap" style="color:orange"> <b> Temperature </b> </button>
-      <div class="content">
-        <p> <br> </p>
-        <div id="map2"> </div> <!-- Initialize map2 and legend2 -->
-        <div id='time_series'>
-          <h1 style="background:rgb(250, 130, 100);">Month</h1>
-          <div class='session' style="background:linear-gradient(to left, #7BBDBF, #90E5E8);" id='sliderbar2'>
-            <h2><label id='a_month2'>Jan</label> 1999</h2>
-            <input id='slider2' class='row' type='range' min='0' max='11' step='1' value='0'/>
-          </div>
-        </div>
-        <p> <br> </p>
-        <div class='map-overlay2' id='legend2'></div>
-          <h5> Temperature values (Fahrenheit). Hover and click as much as you'd like! Use the slider to see other months. </h5>
-      </div> </center>
 
     <!-- Description below maps -->
-    <p> <br> These choropleth maps depict the mean monthly precipitation and temperatures for each Texas county in 1999. Many thanks to the NCDC for provided the extensive data source below. You will also find the geographic center of Texas (northeastern McColloch County). </p>
-    <p> <br> The reason I'm submitting weather-related maps for these labs is because my Capstone project will likely revolve around the remote sensing of temperature across various land surfaces. </p>
+    <p> <br> These choropleth maps depict the mean monthly precipitation and temperatures for each Texas county in 1999. Many thanks to the NCDC for providing the extensive data source below. The geographic center of Texas is at [-99.1704, 31.3912] (northeastern McColloch County). </p>
+    <p> <br> The reason I'm submitting weather-related maps for these labs is because my Capstone project deals with temperature across topologically diverse land surfaces. </p>
     <p> <br> I realize this is a somewhat silly climate analysis, but the data were readily available, and the maps still serve a purpose. </p>
 
-    <p style="font-size:90%;font-family:Comic;"> <!-- References and conclusion -->
-      <br> <br> <b> <u> Data Sources: </u> </b> <br>
-          <br> - Climate Data provided by the NCDC (National Centers for Environmental Information) at the following URL: <a href="https://www.ncdc.noaa.gov/cag/county/mapping/"> https://www.ncdc.noaa.gov/cag/county/mapping/</a>. Data was downloaded as a comma-separated file. Temporal information was modified in order to convert to a geoJSON file online. No other modifications were made to the dataset.
-          <br> <br> - Temperature Anomaly and Population Data: <a href="https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/"> https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/</a>. Part of a climate change analysis performed by Washington Post staff in Augsut 2020.
-          <br> <br> - Texas Counties GEOJSON: <a href="https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa"> https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa</a>. Manually added precipitation and temperature fields from the NCDC source, as well as temperature anomaly and population fields from the Washington Post source.
     <p> <br> </p>
     <p> <br> </p>
-    <center> <p style="font-size:85%;font-family:Comic"> <b> Eric Anderson </b> <a href="https://ermian98-uw.github.io/GIS/welcome.html"> <br> Back to my Welcome page <br> &nbsp; </a> </p> </center>
+    <p style="font-size:95%;padding-top:5px;border-top:solid;border-top-style:double;border-top-width:6px;border-color:lime;font-family:Comic;"> <!-- References and conclusion -->
+      <br> <br> <b> <u style="font-size:125%;"> Data Sources: </u> </b> <br>
+          <br> (1.) &nbsp; <a href="https://www.ncdc.noaa.gov/cag/county/mapping/"> https://www.ncdc.noaa.gov/cag/county/mapping/</a> <br> &nbsp; &nbsp; &nbsp; Climate Data provided by the NCDC (National Centers for Environmental Information). Data was downloaded as a comma-separated file. Temporal information was modified in order to convert to a geoJSON file online. No other modifications were made to the dataset.
+          <br> <br> (2.) &nbsp; <a href="https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/"> https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/</a> <br> &nbsp; &nbsp; &nbsp; Temperature Anomaly and Population Data. Part of a climate change analysis performed by Washington Post staff in August 2020.
+          <br> <br> (3.) &nbsp; <a href="https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa"> https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa</a> <br> &nbsp; &nbsp; &nbsp; Texas Counties GEOJSON. Manually added precipitation and temperature fields from the NCDC source, as well as temperature anomaly and population fields from the Washington Post source.
     <p> <br> </p>
+    <p> <br> </p>
+    <div id="bottom">
+      <img src="https://cdn.iconscout.com/icon/free/png-512/corner-arrow-1767447-1502517.png"
+        alt="Arrow Right"
+        style="width:100px;
+        margin-left: 500px;
+        float:left;
+        align:center"/>
+      <center> <p style="float:left;font-size:165%;border:solid;border-width:6px;background:linear-gradient(to left, #105473, #621073);width:20%;font-family:"Monaco",fantasy;"> <a style="color:#F0F00F;" href="https://ermian98-uw.github.io/GIS/welcome.html"> <br> Home <br> <br> </a> </p> </center>
+      <img src="https://cdn.iconscout.com/icon/free/png-512/corner-arrow-1767538-1502442.png"
+        alt="Arrow Left"
+        style="width:100px;
+        float:left;
+        align:center"/>
+
+    <p style="padding:75px;"> <br> </p>
 
     <script> // begin JavaScript
 			mapboxgl.accessToken = "pk.eyJ1IjoiZXJtaWFuOTgiLCJhIjoiY2tnaXVwYWtrMGEwbjJ1cGRlZDQ2bmd1OCJ9.gy2NOY8e3cmhzG6JiEyj4A";
@@ -95,42 +135,51 @@
       // Basic popups for geographic center
       var popup1 = new mapboxgl.Popup( {className: "quickstart-popup"} )
         .setLngLat([-99.1704,30.3912])
-        .setHTML("<b> Move the slider to begin! </b>")
+        .setHTML("<b> Click the play button to begin </b>")
         .addTo(map1);
-			var marker1 = new mapboxgl.Marker()
-				.setLngLat([-99.1704,31.3912])
-				.addTo(map1);
       var popup2 = new mapboxgl.Popup( {className: "quickstart-popup"} )
         .setLngLat([-99.1704,30.3912])
-        .setHTML("<b> Move the slider to begin! </b>")
+        .setHTML("<b> Click the play button to begin </b>")
         .addTo(map2);
-      var marker2 = new mapboxgl.Marker()
-        .setLngLat([-99.1704,31.3912])
-        .addTo(map2);
-      var mystring = "PJan_1999"
+      var mystring = "PJan_1999";
+      var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-      document.getElementById('slider1').addEventListener('input', function(e) {
-        var month = parseInt(e.target.value);
-        var m_dis = " ";
-        if (month == 0) {
+      var active1 = false;
+      var monthSlider1 = document.getElementById('slider1');
+      var curMonthIndex1 = -1;
+      function advanceMonth1() {
+        ++curMonthIndex1;
+        if (curMonthIndex1 >= months.length) {
+            curMonthIndex1 = 0;
+        }
+        return curMonthIndex1;
+      }
+
+      function slide1() {
+        var cycleMonths1 = window.setInterval(function() {
+          var month = advanceMonth1();
+          var m_dis = " ";
+          parseInt(month);
+        if (month % 12 == 0) {
           m_dis = "Jan"; mystring = "PJan_1999";
-        } else if (month == 1) { m_dis = "Feb"; mystring = "PFeb_1999";
-        } else if (month == 2) { m_dis = "Mar"; mystring = "PMar_1999";
-        } else if (month == 3) { m_dis = "Apr"; mystring = "PApr_1999";
-        } else if (month == 4) { m_dis = "May"; mystring = "PMay_1999";
-        } else if (month == 5) { m_dis = "Jun"; mystring = "PJun_1999";
-        } else if (month == 6) { m_dis = "Jul"; mystring = "PJul_1999";
-        } else if (month == 7) { m_dis = "Aug"; mystring = "PAug_1999";
-        } else if (month == 8) { m_dis = "Sep"; mystring = "PSep_1999";
-        } else if (month == 9) { m_dis = "Oct"; mystring = "POct_1999";
-        } else if (month == 10) { m_dis = "Nov"; mystring = "PNov_1999";
-        } else if (month == 11) { m_dis = "Dec"; mystring = "PDec_1999";
+        } else if (month % 12 == 1) { m_dis = "Feb"; mystring = "PFeb_1999";
+        } else if (month % 12 == 2) { m_dis = "Mar"; mystring = "PMar_1999";
+        } else if (month % 12 == 3) { m_dis = "Apr"; mystring = "PApr_1999";
+        } else if (month % 12 == 4) { m_dis = "May"; mystring = "PMay_1999";
+        } else if (month % 12 == 5) { m_dis = "Jun"; mystring = "PJun_1999";
+        } else if (month % 12 == 6) { m_dis = "Jul"; mystring = "PJul_1999";
+        } else if (month % 12 == 7) { m_dis = "Aug"; mystring = "PAug_1999";
+        } else if (month % 12 == 8) { m_dis = "Sep"; mystring = "PSep_1999";
+        } else if (month % 12 == 9) { m_dis = "Oct"; mystring = "POct_1999";
+        } else if (month % 12 == 10) { m_dis = "Nov"; mystring = "PNov_1999";
+        } else if (month % 12 == 11) { m_dis = "Dec"; mystring = "PDec_1999";
         }
         // update the map by removing and adding again
         popup1.remove();
         map1.removeLayer("counties1");
         map1.removeLayer("counties2");
         map1.removeLayer("counties3");
+        map1.removeLayer("pop1");
         map1.removeLayer("counties_bord1");
         map1.addLayer({
 					"id":"counties1",
@@ -160,12 +209,12 @@
           }
         });
         map1.addLayer({
-          "id":"Tcounties",
-          "type":"fill",
+          "id":"pop1",
+          "type":"line",
           "source": "counties_P",
           'paint': {
-            'fill-color': "rgb(0, 0, 0)", // hover layer
-            'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.5,0]
+            'line-color': "rgb(255, 0, 0)", // hover layer
+            'line-width': ['/',['number', ['get', "POPESTIMATE2018"]],300000]
           }
         });
         map1.addLayer({
@@ -177,8 +226,21 @@
             'line-width': 0.75
           }
         });
-        document.getElementById('a_month1').innerText = m_dis;  // update text in the slider UI
-      });
+        document.getElementById('a_month1').innerText = m_dis;
+        document.getElementById('slider1').value = month;  // update text in the slider UI
+      }, 750);
+
+       document.getElementById('button12').addEventListener("click", function(e) {
+         window.clearInterval(cycleMonths1);
+         active1 = false;
+       })
+     }
+      document.getElementById('button11').addEventListener("click", function(e) {
+        if (!active1) {
+          slide1();
+          active1 = true;
+        }
+      })
 
       // Add GeoJSON layers (this makes )
 			map1.on('load', function(){ // map with precip values
@@ -192,8 +254,8 @@
 			});
 
       // populating first legend
-      var precip = ['<b><u>Legend:</u></b>', ' ', 'Wettest', 'Wet', 'Dry', 'Dryest'];
-      var cols1 = ['#000000', '#99FFAD', '#27E6E6', '#00B539', '#AFB539', '#E6B53A'];
+      var precip = ['<b><u>Legend:</u></b>', ' ', 'Wettest', 'Wet', 'Dry', 'Dryest', ' ', 'Urban Areas'];
+      var cols1 = ['#000000', '#99FFAD', '#27E6E6', '#00B539', '#AFB539', '#E6B53A', '#99FFAD', "#EF0000"];
       for (i = 0; i < precip.length; i++) {
         var p = precip[i];
         var col1 = cols1[i];
@@ -208,28 +270,42 @@
         legend1.appendChild(item);
       }
 
-      document.getElementById('slider2').addEventListener('input', function(e) {
-        var month = parseInt(e.target.value);
-        var m_dis = " ";
-        if (month == 0) {
+      var active2 = false;
+      var monthSlider2 = document.getElementById('slider2');
+      var curMonthIndex2 = -1;
+      function advanceMonth2() {
+        ++curMonthIndex2;
+        if (curMonthIndex2 >= months.length) {
+            curMonthIndex2 = 0;
+        }
+        return curMonthIndex2;
+      }
+
+      function slide2() {
+        var cycleMonths2 = window.setInterval(function() {
+          var month = advanceMonth2();
+          var m_dis = " ";
+          parseInt(month);
+        if (month % 12 == 0) {
           m_dis = "Jan"; mystring = "TJan_1999";
-        } else if (month == 1) { m_dis = "Feb"; mystring = "TFeb_1999";
-        } else if (month == 2) { m_dis = "Mar"; mystring = "TMar_1999";
-        } else if (month == 3) { m_dis = "Apr"; mystring = "TApr_1999";
-        } else if (month == 4) { m_dis = "May"; mystring = "TMay_1999";
-        } else if (month == 5) { m_dis = "Jun"; mystring = "TJun_1999";
-        } else if (month == 6) { m_dis = "Jul"; mystring = "TJul_1999";
-        } else if (month == 7) { m_dis = "Aug"; mystring = "TAug_1999";
-        } else if (month == 8) { m_dis = "Sep"; mystring = "TSep_1999";
-        } else if (month == 9) { m_dis = "Oct"; mystring = "TOct_1999";
-        } else if (month == 10) { m_dis = "Nov"; mystring = "TNov_1999";
-        } else if (month == 11) { m_dis = "Dec"; mystring = "TDec_1999";
+        } else if (month % 12 == 1) { m_dis = "Feb"; mystring = "TFeb_1999";
+        } else if (month % 12 == 2) { m_dis = "Mar"; mystring = "TMar_1999";
+        } else if (month % 12 == 3) { m_dis = "Apr"; mystring = "TApr_1999";
+        } else if (month % 12 == 4) { m_dis = "May"; mystring = "TMay_1999";
+        } else if (month % 12 == 5) { m_dis = "Jun"; mystring = "TJun_1999";
+        } else if (month % 12 == 6) { m_dis = "Jul"; mystring = "TJul_1999";
+        } else if (month % 12 == 7) { m_dis = "Aug"; mystring = "TAug_1999";
+        } else if (month % 12 == 8) { m_dis = "Sep"; mystring = "TSep_1999";
+        } else if (month % 12 == 9) { m_dis = "Oct"; mystring = "TOct_1999";
+        } else if (month % 12 == 10) { m_dis = "Nov"; mystring = "TNov_1999";
+        } else if (month % 12 == 11) { m_dis = "Dec"; mystring = "TDec_1999";
         }
         // update the map by removing and adding again
         popup2.remove();
         map2.removeLayer("counties4");
         map2.removeLayer("counties5");
         map2.removeLayer("counties6");
+        map2.removeLayer("pop2");
         map2.removeLayer("counties_bord2");
         map2.addLayer({
           "id":"counties4",
@@ -259,6 +335,15 @@
           }
         });
         map2.addLayer({
+          "id":"pop2",
+          "type":"line",
+          "source": "counties_T",
+          'paint': {
+            'line-color': "rgb(255, 0, 0)", // hover layer
+            'line-width': ['/',['number', ['get', "POPESTIMATE2018"]],300000]
+          }
+        });
+        map2.addLayer({
           "id":"counties_bord2",
           "type":"line",
           "source": "counties_T",
@@ -267,8 +352,21 @@
             'line-width': 0.75
           }
         });
-        document.getElementById('a_month2').innerText = m_dis;  // update text in the slider UI
-      });
+        document.getElementById('a_month2').innerText = m_dis;
+        document.getElementById('slider2').value = month;  // update text in the slider UI
+      }, 750);
+
+       document.getElementById('button22').addEventListener("click", function(e) {
+         window.clearInterval(cycleMonths2);
+         active2 = false;
+       })
+     }
+      document.getElementById('button21').addEventListener("click", function(e) {
+        if (!active2) {
+          slide2();
+          active2 = true;
+        }
+      })
 
       map2.on('load', function(){ // map with temp values
         var counties_T = "TX_counties2.geojson"
@@ -280,8 +378,8 @@
   			});
 
         // populating second legend
-        var heat = ['<b><u>Legend:</u></b>', ' ', 'Hottest', 'Hot', 'Cold', 'Coldest'];
-        var cols2 = ['#000000', '#FA8264', '#ECF53D', '#EDEC9D', '#AFEDCD', '#3D71F5'];
+        var heat = ['<b><u>Legend:</u></b>', ' ', 'Hottest', 'Hot', 'Cold', 'Coldest', ' ', 'Urban Areas'];
+        var cols2 = ['#000000', '#FA8264', '#ECF53D', '#EDEC9D', '#AFEDCD', '#3D71F5', '#FA8264', "#EF0000"];
         for (i = 0; i < heat.length; i++) {
           var h = heat[i];
           var col2 = cols2[i];
@@ -406,6 +504,6 @@
           }
         });
       }
-		</script>
+     </script>
   </body>
 </html>
