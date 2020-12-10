@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<!-- Eric Anderson -->
+<!-- TGIS 503 -->
+<!-- Lab 4 -->
+<!-- lab4.html -->
+
+<html>
+  <head> <!-- Head -->
+    <title> Lab 4 - Storytelling Through Maps </title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+
+    <!-- Mapbox GL library Links -->
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"> </script>
+
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TyZRjTrLBW0ttWqVVFcf_da7oyw3rR9vbYcD5OQoLp3UJbbarDbKf83aCH2xps_ddG62VhIPl6U5uucr1utttBPNYr_kW0uS1tYEtbO1ROx3_0WsZkaH5NUqUJf7ZyWVstvZDQoBeTnYJoL9TkbmW6XFIa9oCHYC2QouoFmD7gQtdwJW5qS-Phz1D16hfNBqtEeJks1ks9_z2v6NgmKba62hLglP4DK-LIUcCsGsGsZZV_FQLdHCDc012nzDQXPKK-_baTlMDBFFIBd74RfQ5Xx6N1e7K5-ddTX7tfxHOEYJ52o4_1aM78LaSXuQJMV8xFxejbAF0P5rZBYw3oHIG1vl9dEganbJ5gxfzzIbkoNu49vAm8Kr8a9knJuFbgHH90U_vvaODcnbwGsBNtokjhDUUdIIVbx53sJQg2PnbKRSe5KhW_2ClHUA2E3-j3nuX5nqlOQfZwoTCilbkx-1z6CideEUCNCDC4X_Aa85iKwDMvmf6RjYxASVj2VfQitJMOXGlS5xiUJ88Qw-xf3HdSwymCmIsWD2kKHIAXTokwY4YcQLLVX5CkWcBMHiutbfjoAxGWIM6wyBfqrlR_an8BJ4IHyxW5AW0AzHvAZgO0x6s4BzR9FJ2mjd_Rpx1iftVfRYgXX11Te-c7BHT6ni8Ty-sOcBb6DXfnUBhJF6RFk" charset="UTF-8"></script>
+  </head>
+
+  <body>
+    <p> <br> </p> <!-- Title of page -->
+    <h1> Examining Texas Climate in 1999 </h1>
+    <p> <br> </p>
+    <p style="text-align:center;"> <b> Click on a button below to reveal a map. </b> </p>
+    <p> <br> </p>
+
+    <!-- Menus for each map, initailized -->
+    <center> <button class="collap" style="color:#0E0C86"> <b> Precipitation </b> </button>
+    <div class="content">
+      <p> <br> </p>
+      <div id="map1"> </div> <!-- Initialize map1 and legend1 -->
+        <div id='time_series'>
+          <h1 style="background:rgb(153, 255, 173);">Month</h1>
+          <div class='session' style="background:linear-gradient(to left, #7BBDBF, #90E5E8);" id='sliderbar1'>
+            <h2><label id='a_month1'>Jan</label> 1999</h2>
+            <input id='slider1' class='row' type='range' min='0' max='11' step='1' value='0'/>
+          </div>
+        </div>
+        <p> <br> </p>
+        <div class='map-overlay1' id='legend1'></div>
+          <h5> Precipitation values (inches). Hover and click as much as you'd like! Use the slider to see other months. </h5>
+        </div> </center>
+    <p> <br> </p>
+    <center> <button class="collap" style="color:orange"> <b> Temperature </b> </button>
+      <div class="content">
+        <p> <br> </p>
+        <div id="map2"> </div> <!-- Initialize map2 and legend2 -->
+        <div id='time_series'>
+          <h1 style="background:rgb(250, 130, 100);">Month</h1>
+          <div class='session' style="background:linear-gradient(to left, #7BBDBF, #90E5E8);" id='sliderbar2'>
+            <h2><label id='a_month2'>Jan</label> 1999</h2>
+            <input id='slider2' class='row' type='range' min='0' max='11' step='1' value='0'/>
+          </div>
+        </div>
+        <p> <br> </p>
+        <div class='map-overlay2' id='legend2'></div>
+          <h5> Temperature values (Fahrenheit). Hover and click as much as you'd like! Use the slider to see other months. </h5>
+      </div> </center>
+
+    <!-- Description below maps -->
+    <p> <br> These choropleth maps depict the mean monthly precipitation and temperatures for each Texas county in 1999. Many thanks to the NCDC for provided the extensive data source below. You will also find the geographic center of Texas (northeastern McColloch County). </p>
+    <p> <br> The reason I'm submitting weather-related maps for these labs is because my Capstone project will likely revolve around the remote sensing of temperature across various land surfaces. </p>
+    <p> <br> I realize this is a somewhat silly climate analysis, but the data were readily available, and the maps still serve a purpose. </p>
+
+    <p style="font-size:90%;font-family:Comic;"> <!-- References and conclusion -->
+      <br> <br> <b> <u> Data Sources: </u> </b> <br>
+          <br> - Climate Data provided by the NCDC (National Centers for Environmental Information) at the following URL: <a href="https://www.ncdc.noaa.gov/cag/county/mapping/"> https://www.ncdc.noaa.gov/cag/county/mapping/</a>. Data was downloaded as a comma-separated file. Temporal information was modified in order to convert to a geoJSON file online. No other modifications were made to the dataset.
+          <br> <br> - Temperature Anomaly and Population Data: <a href="https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/"> https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/</a>. Part of a climate change analysis performed by Washington Post staff in Augsut 2020.
+          <br> <br> - Texas Counties GEOJSON: <a href="https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa"> https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa</a>. Manually added precipitation and temperature fields from the NCDC source, as well as temperature anomaly and population fields from the Washington Post source.
+    <p> <br> </p>
+    <p> <br> </p>
+    <center> <p style="font-size:85%;font-family:Comic"> <b> Eric Anderson </b> <a href="https://ermian98-uw.github.io/GIS/welcome.html"> <br> Back to my Welcome page <br> &nbsp; </a> </p> </center>
+    <p> <br> </p>
+
+    <script> // begin JavaScript
+			mapboxgl.accessToken = "pk.eyJ1IjoiZXJtaWFuOTgiLCJhIjoiY2tnaXVwYWtrMGEwbjJ1cGRlZDQ2bmd1OCJ9.gy2NOY8e3cmhzG6JiEyj4A";
+			var map1 = new mapboxgl.Map({
+			  container: "map1",
+			  style: "mapbox://styles/ermian98/ckhws5qm105i819phtroyx21o", // import custom style
+			  center: [-99.1704,31.3912], // geographic center of Texas
+			  zoom: 4.6 // set zoom to Texas
+			});
+      var map2 = new mapboxgl.Map({
+        container: "map2",
+        style: "mapbox://styles/ermian98/ckhws5qm105i819phtroyx21o", // import custom style
+        center: [-99.1704,31.3912], // geographic center of Texas
+        zoom: 4.6 // set zoom to Texas
+      });
+      map1.addControl(new mapboxgl.NavigationControl());
+      map2.addControl(new mapboxgl.NavigationControl());
+
+      // Basic popups for geographic center
+      var popup1 = new mapboxgl.Popup( {className: "quickstart-popup"} )
+        .setLngLat([-99.1704,30.3912])
+        .setHTML("<b> Move the slider to begin! </b>")
+        .addTo(map1);
+			var marker1 = new mapboxgl.Marker()
+				.setLngLat([-99.1704,31.3912])
+				.addTo(map1);
+      var popup2 = new mapboxgl.Popup( {className: "quickstart-popup"} )
+        .setLngLat([-99.1704,30.3912])
+        .setHTML("<b> Move the slider to begin! </b>")
+        .addTo(map2);
+      var marker2 = new mapboxgl.Marker()
+        .setLngLat([-99.1704,31.3912])
+        .addTo(map2);
+      var mystring = "PJan_1999"
+
+      document.getElementById('slider1').addEventListener('input', function(e) {
+        var month = parseInt(e.target.value);
+        var m_dis = " ";
+        if (month == 0) {
+          m_dis = "Jan"; mystring = "PJan_1999";
+        } else if (month == 1) { m_dis = "Feb"; mystring = "PFeb_1999";
+        } else if (month == 2) { m_dis = "Mar"; mystring = "PMar_1999";
+        } else if (month == 3) { m_dis = "Apr"; mystring = "PApr_1999";
+        } else if (month == 4) { m_dis = "May"; mystring = "PMay_1999";
+        } else if (month == 5) { m_dis = "Jun"; mystring = "PJun_1999";
+        } else if (month == 6) { m_dis = "Jul"; mystring = "PJul_1999";
+        } else if (month == 7) { m_dis = "Aug"; mystring = "PAug_1999";
+        } else if (month == 8) { m_dis = "Sep"; mystring = "PSep_1999";
+        } else if (month == 9) { m_dis = "Oct"; mystring = "POct_1999";
+        } else if (month == 10) { m_dis = "Nov"; mystring = "PNov_1999";
+        } else if (month == 11) { m_dis = "Dec"; mystring = "PDec_1999";
+        }
+        // update the map by removing and adding again
+        popup1.remove();
+        map1.removeLayer("counties1");
+        map1.removeLayer("counties2");
+        map1.removeLayer("counties3");
+        map1.removeLayer("counties_bord1");
+        map1.addLayer({
+					"id":"counties1",
+          "type":"fill",
+					"source": "counties_P",
+          'paint': {
+            'fill-color': "rgb(230, 181, 58)", // base color (dryest counties, covers basemap)
+            'fill-opacity': 1
+          }
+				});
+        map1.addLayer({
+          "id":"counties2",
+          "type":"fill",
+          "source": "counties_P",
+          'paint': {
+            'fill-color': "rgb(0, 181, 58)", // amount of rainfall dictates opacity of green
+            'fill-opacity': ['/',['+',1,['number', ['get', mystring],0]],3]
+          }
+        });
+        map1.addLayer({
+          "id":"counties3",
+          "type":"fill",
+          "source": "counties_P",
+          'paint': {
+            'fill-color': "rgb(0, 0, 0)", // hover layer
+            'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.5,0]
+          }
+        });
+        map1.addLayer({
+          "id":"Tcounties",
+          "type":"fill",
+          "source": "counties_P",
+          'paint': {
+            'fill-color': "rgb(0, 0, 0)", // hover layer
+            'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.5,0]
+          }
+        });
+        map1.addLayer({
+          "id":"counties_bord1",
+          "type":"line",
+          "source": "counties_P",
+          'paint': {
+            'line-color': "rgb(0, 0, 0)", // county borders
+            'line-width': 0.75
+          }
+        });
+        document.getElementById('a_month1').innerText = m_dis;  // update text in the slider UI
+      });
+
+      // Add GeoJSON layers (this makes )
+			map1.on('load', function(){ // map with precip values
+        var counties_P = "TX_counties2.geojson"
+        var Tcounties = "counties.geojson"
+				map1.addSource("counties_P", {
+							"type": "geojson",
+							"data": "https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab4/TX_counties2.geojson",
+              'generateId': true
+					});
+			});
+
+      // populating first legend
+      var precip = ['<b><u>Legend:</u></b>', ' ', 'Wettest', 'Wet', 'Dry', 'Dryest'];
+      var cols1 = ['#000000', '#99FFAD', '#27E6E6', '#00B539', '#AFB539', '#E6B53A'];
+      for (i = 0; i < precip.length; i++) {
+        var p = precip[i];
+        var col1 = cols1[i];
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = col1;
+        var value = document.createElement('span');
+        value.innerHTML = p;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend1.appendChild(item);
+      }
+
+      document.getElementById('slider2').addEventListener('input', function(e) {
+        var month = parseInt(e.target.value);
+        var m_dis = " ";
+        if (month == 0) {
+          m_dis = "Jan"; mystring = "TJan_1999";
+        } else if (month == 1) { m_dis = "Feb"; mystring = "TFeb_1999";
+        } else if (month == 2) { m_dis = "Mar"; mystring = "TMar_1999";
+        } else if (month == 3) { m_dis = "Apr"; mystring = "TApr_1999";
+        } else if (month == 4) { m_dis = "May"; mystring = "TMay_1999";
+        } else if (month == 5) { m_dis = "Jun"; mystring = "TJun_1999";
+        } else if (month == 6) { m_dis = "Jul"; mystring = "TJul_1999";
+        } else if (month == 7) { m_dis = "Aug"; mystring = "TAug_1999";
+        } else if (month == 8) { m_dis = "Sep"; mystring = "TSep_1999";
+        } else if (month == 9) { m_dis = "Oct"; mystring = "TOct_1999";
+        } else if (month == 10) { m_dis = "Nov"; mystring = "TNov_1999";
+        } else if (month == 11) { m_dis = "Dec"; mystring = "TDec_1999";
+        }
+        // update the map by removing and adding again
+        popup2.remove();
+        map2.removeLayer("counties4");
+        map2.removeLayer("counties5");
+        map2.removeLayer("counties6");
+        map2.removeLayer("counties_bord2");
+        map2.addLayer({
+          "id":"counties4",
+          "type":"fill",
+          "source": "counties_T",
+          'paint': {
+            'fill-color': "rgb(61, 113, 245)", // base color (coldest counties, covers basemap)
+            'fill-opacity': 1
+          }
+        });
+        map2.addLayer({
+          "id":"counties5",
+          "type":"fill",
+          "source": "counties_T",
+          'paint': {
+            'fill-color': "rgb(236, 245, 61)",  // magnitude of temperature dictates opacity of yellow
+            'fill-opacity': ['/',['-',['number', ['get', mystring],0],35],50]
+          }
+        });
+        map2.addLayer({
+          "id":"counties6",
+          "type":"fill",
+          "source": "counties_T",
+          'paint': {
+            'fill-color': "rgb(0, 0, 0)", // hover layer
+            'fill-opacity': ['case',['boolean',['feature-state','hover'],false],0.5,0]
+          }
+        });
+        map2.addLayer({
+          "id":"counties_bord2",
+          "type":"line",
+          "source": "counties_T",
+          'paint': {
+            'line-color': "rgb(0, 0, 0)", // county borders
+            'line-width': 0.75
+          }
+        });
+        document.getElementById('a_month2').innerText = m_dis;  // update text in the slider UI
+      });
+
+      map2.on('load', function(){ // map with temp values
+        var counties_T = "TX_counties2.geojson"
+        map2.addSource("counties_T", {
+              "type": "geojson",
+              "data": "https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab4/TX_counties2.geojson",
+              'generateId': true
+          });
+  			});
+
+        // populating second legend
+        var heat = ['<b><u>Legend:</u></b>', ' ', 'Hottest', 'Hot', 'Cold', 'Coldest'];
+        var cols2 = ['#000000', '#FA8264', '#ECF53D', '#EDEC9D', '#AFEDCD', '#3D71F5'];
+        for (i = 0; i < heat.length; i++) {
+          var h = heat[i];
+          var col2 = cols2[i];
+          var item = document.createElement('div');
+          var key = document.createElement('span');
+          key.className = 'legend-key';
+          key.style.backgroundColor = col2;
+          var value = document.createElement('span');
+          value.innerHTML = h;
+          item.appendChild(key);
+          item.appendChild(value);
+          legend2.appendChild(item);
+        }
+
+        // custom popups for county and precipitation information on map 1
+        map1.on('click', 'counties3', function (e) {
+          var type = e.features[0].properties.PJan_1999;
+          if (mystring.includes("PFeb_1999")) {
+            type = e.features[0].properties.PFeb_1999;
+          } else if (mystring.includes("PMar_1999")) { type = e.features[0].properties.PMar_1999;
+          } else if (mystring.includes("PApr_1999")) { type = e.features[0].properties.PApr_1999;
+          } else if (mystring.includes("PMay_1999")) { type = e.features[0].properties.PMay_1999;
+          } else if (mystring.includes("PJun_1999")) { type = e.features[0].properties.PJun_1999;
+          } else if (mystring.includes("PJul_1999")) { type = e.features[0].properties.PJul_1999;
+          } else if (mystring.includes("PAug_1999")) { type = e.features[0].properties.PAug_1999;
+          } else if (mystring.includes("PSep_1999")) { type = e.features[0].properties.PSep_1999;
+          } else if (mystring.includes("POct_1999")) { type = e.features[0].properties.POct_1999;
+          } else if (mystring.includes("PNov_1999")) { type = e.features[0].properties.PNov_1999;
+          } else if (mystring.includes("PDec_1999")) { type = e.features[0].properties.PDec_1999;
+          }
+          new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML("<b>" + e.features[0].properties.name + " County:" + "</b> <br> " + type + " inches of rain in " + mystring.substring(1,4) + " " + mystring.substring(5,9))
+          .addTo(map1);
+        });
+
+        // custom popups for county and temperature information on map 2
+        map2.on('click', 'counties6', function (e) {
+          var type = e.features[0].properties.TJan_1999;
+          if (mystring.includes("TFeb_1999")) {
+            type = e.features[0].properties.PFeb_1999;
+          } else if (mystring.includes("TMar_1999")) { type = e.features[0].properties.TMar_1999;
+          } else if (mystring.includes("TApr_1999")) { type = e.features[0].properties.TApr_1999;
+          } else if (mystring.includes("TMay_1999")) { type = e.features[0].properties.TMay_1999;
+          } else if (mystring.includes("TJun_1999")) { type = e.features[0].properties.TJun_1999;
+          } else if (mystring.includes("TJul_1999")) { type = e.features[0].properties.TJul_1999;
+          } else if (mystring.includes("TAug_1999")) { type = e.features[0].properties.TAug_1999;
+          } else if (mystring.includes("TSep_1999")) { type = e.features[0].properties.TSep_1999;
+          } else if (mystring.includes("TOct_1999")) { type = e.features[0].properties.TOct_1999;
+          } else if (mystring.includes("TNov_1999")) { type = e.features[0].properties.TNov_1999;
+          } else if (mystring.includes("TDec_1999")) { type = e.features[0].properties.TDec_1999;
+          }
+          new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML("<b>" + e.features[0].properties.name + " County:" + "</b> <br> " + type + "\u00B0F mean temperature in " + mystring.substring(1,4) + " " + mystring.substring(5,9))
+          .addTo(map2);
+        });
+
+        // code to activiate hover mode with cursor (both maps)
+        var hoveredStateId = null;
+        map1.on('mousemove', 'counties3', (e) => {
+          map1.getCanvas().style.cursor = 'pointer';
+          if (e.features.length > 0) {
+            if (hoveredStateId) {
+              map1.removeFeatureState({
+                source: "counties_P",
+                id: hoveredStateId
+              });
+            }
+            hoveredStateId = e.features[0].id;
+            map1.setFeatureState({
+              source: 'counties_P',
+              id: hoveredStateId,
+            }, { hover: true });
+          }
+        });
+        map1.on("mouseleave", "counties3", function() {
+          if (hoveredStateId) {
+            map1.setFeatureState({
+              source: 'counties_P',
+              id: hoveredStateId
+            }, { hover: false });
+          }
+        });
+
+        var hoveredStateId2 = null;
+        map2.on('mousemove', 'counties6', (e) => {
+          map2.getCanvas().style.cursor = 'pointer';
+          if (e.features.length > 0) {
+            if (hoveredStateId2) {
+              map2.removeFeatureState({
+                source: "counties_T",
+                id: hoveredStateId2
+              });
+            }
+            hoveredStateId2 = e.features[0].id;
+            map2.setFeatureState({
+              source: 'counties_T',
+              id: hoveredStateId2,
+            }, { hover: true });
+          }
+        });
+        map2.on("mouseleave", "counties6", function() {
+          if (hoveredStateId2) {
+            map2.setFeatureState({
+              source: 'counties_T',
+              id: hoveredStateId2
+            }, { hover: false });
+          }
+        });
+
+      // collapsible menu code
+      var coll = document.getElementsByClassName("collap");
+      for (j = 0; j < coll.length; j++) {
+        coll[j].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
+      }
+		</script>
+  </body>
+</html>
