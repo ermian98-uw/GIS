@@ -418,11 +418,14 @@
       };
 
       document.getElementById('slider2').addEventListener('input', function(e) {
-        slide2(parseInt(e.target.value));
         window.clearInterval(cycleYear);
-        cycleYear = window.setInterval(function() {
-          move = move + 1
-          slide2(parseInt(e.target.value)); }, 2000);
+	move = 1;
+	slide2(parseInt(e.target.value));
+	if (!active2) {
+           cycleYear = window.setInterval(function() {
+           move = move + 1
+           slide2(parseInt(e.target.value)); }, 2000);
+	}
       })
 
       function optevent() { // for next few lines
