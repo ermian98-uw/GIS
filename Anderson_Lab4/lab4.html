@@ -431,6 +431,8 @@
 
        document.getElementById('button22').addEventListener("click", function(e) {
          window.clearInterval(cycleMonths2);
+	 window.clearInterval(cycleYear);
+	 move = 1;
          active2 = false;
          cycleYear = window.setInterval(function() {
            move = move + 1
@@ -444,10 +446,7 @@
           active2 = true;
           cycleMonths2 = window.setInterval(function() {slide2(advanceMonth2()) }, 750);
         }
-      })
-	    
-      window.setInterval(function() {
-	  window.clearInterval(cycleYear); }, 32000)
+      })	    
 
       map2.on('load', function(){ // map with temp values
         var counties_T = "TX_counties2.geojson"
