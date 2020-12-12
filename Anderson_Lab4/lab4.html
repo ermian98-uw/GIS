@@ -27,10 +27,10 @@
     <center> <p id="divide" <br> ERIC ANDERSON <br> TGIS 503 </p> </center>
     <p> <br> </p>
     <p> <br> </p>
-    <p style="font-size:115%;text-align:center;"> <br> A common metric for identifying global warming due to climate change is "temperature anomaly" from a previous era (such as the 19th or 20th century average). Across the majority of the planet, these anomalies are in the positive, and Texas is no exception. On this webpage, we will visualize temperature anomalies by county by month between circa 1895 and 1999. We will also consider monthly precipitation accumulation. </p>
+    <p style="font-size:115%;text-align:center;"> <br> A common metric for identifying global warming is the "temperature anomaly" from a previous era (such as the mean difference between the 20th and 21th centuries). Across most of planet Earth, these anomalies are in the positive, and Texas is no exception. On this webpage, we will visualize temperature anomalies by county and by month between 1895 and 1999. We will also look at 1999 monthly precipitation accumulation. </p>
     <p> <br> </p>
     <p> <br> </p>
-    <p style="font-size:95%;text-align:center;"> <br> <i> (Use Google Chrome full screen for best user experience) </i> </p>
+    <p style="font-size:95%;text-align:center;"> <br> <i> (Use Google Chrome of Mozilla Firefox full screen for best user experience) </i> </p>
     <p id="divide">
     <p> <br> </p>
     <p> <br> </p>
@@ -102,25 +102,26 @@
           <img src="https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab4/TA.jpg" alt="Texas Anomalies" style="width:100%"> </center>
           <p style="color:black;font-size:115%;"> <b> Click to zoom. </b> </p>
         </a>
-        <p style="color:black;"> Color-coded 100-year temperature anomalies by county; hotter colors indicate greatest warmth trends. </p>
+        <p style="color:black;"> Color-coded 100-year (1895 - 1999) temperature anomalies by county; hotter colors indicate greatest warmth trends. </p>
         <p> <br> </p>
       </div> </center>
     <p> <br> </p>
     <p style="font-size:95%;text-align:center;"> <i> (Preview my customized Mapbox style <a target="_blank" href=https://api.mapbox.com/styles/v1/ermian98/ckhws5qm105i819phtroyx21o.html?fresh=true&title=view&access_token=pk.eyJ1IjoiZXJtaWFuOTgiLCJhIjoiY2tnaXVwYWtrMGEwbjJ1cGRlZDQ2bmd1OCJ9.gy2NOY8e3cmhzG6JiEyj4A>here</a>) </i> </p>
 
     <p id="divide">
-    <p> <br> As you saw hidden inside the buttons, the two choropleth maps illustrate temperature and precipitation for each Texas county in 1999 (as obtained by the NCDC). Note the oscillation between 1895 and 1999 while the timelapse is paused on the temperature map. Also note that the geographic center of Texas is at the coordinates [-99.1704, 31.3912] (northeastern McColloch County). </p>
-    <p> <br> Precipitation accumulation very clearly varies over the year. The northern and eastern counties are the wettest but see more precipitation in the cooler months (because of low pressure systems influenced by the Arctic), while the southern and western counties see more precipitation in the warmer months (because of equatorial weather patterns bringing in more tropical storms). </p>
-    <p> <br> Three counties (Ellis, Kaufman, Kinney) out of 254 miraculously report lower mean annual temperature than ~100 years prior. The others demonstrate a clear spatial distribution, with far-west counties warming the most (+2.5 degrees F) and far-east counties warming the least (< +0.2 degrees F). Note that some of the urban space anomalies are slightly higher than their rural neighbors (especially the Austin and Temple region). </p>
-    <p> <br> Local weather analyses such as these are interesting to me. My Capstone project for the Master of Science in Geospatial Technologies will tackle a similar subject by investigating methods to more accurately estimate temperature across topologically diverse land surfaces. </p>
-    <p> <br> <u> <b> Note:</b></u> I understand this is a somewhat silly and not robust climate analysis; but, the data were readily available and my maps still introduce a compelling story. </p>
+    <p> <br> The buttons above reveal two choropleth maps that illustrate monthly precipitation totals and mean temperatures for each Texas county in 1999 (as obtained by the NCDC). Note the oscillation between 1895 and 1999 while the timelapse is paused on the temperature map. Also note that the geographic center of Texas is at the coordinates [-99.1704, 31.3912] (northeastern McColloch County). </p>
+    <p> <br> Annual precipitation totals have obvious spatio-temporal trends that vary by month. The northern and eastern counties are the wettest but see more precipitation in the cooler months (because of low pressure systems influenced by the Arctic), while the southern and western counties see more precipitation in the warmer months (because of equatorial weather patterns bringing in more tropical systems). </p>
+    <p> <br> Three counties (Ellis, Kaufman, Kinney) out of 254 miraculously report lower mean annual temperature than ~100 years prior. The others demonstrate some interesting spatial correlations; for example, far-western counties warmed the most (+2.5 degrees F) while far-eastern counties warmed the least (< +0.2 degrees F). Note that some of the urban space 
+    lies are slightly higher than their rural neighbors (especially the Austin and Temple region). </p>
+    <p> <br> Local weather analyses such as these are quite interesting to me. My Capstone project for the Master of Science in Geospatial Technologies will tackle a similar subject by investigating methods to more accurately estimate temperature across topologically diverse land surfaces. I want to compare remotely sensed thermal radiation throughout the day with reports from in-situ weather stations that dot the diverse United States landscape. </p>
+    <p> <br> <u> <b> Note:</b></u> I understand that this Texas climate analysis is somewhat silly and not robust; but, the data were readily available and my maps still introduce a compelling story. </p>
 
     <p> <br> </p>
     <p id="divide"> <!-- References and conclusion -->
     <p> <br> <br> <b> <u style="font-size:125%;"> Data Sources: </u> </b> <br>
-          <br> (1.) &nbsp; <a target="_blank" href="https://www.ncdc.noaa.gov/cag/county/mapping/"> https://www.ncdc.noaa.gov/cag/county/mapping/</a> <br> Climate Data provided by the NCDC (National Centers for Environmental Information). Data was downloaded as a comma-separated file. Temporal information was modified in order to convert to a geoJSON file online. No other modifications were made to the dataset.
+          <br> (1.) &nbsp; <a target="_blank" href="https://www.ncdc.noaa.gov/cag/county/mapping/"> https://www.ncdc.noaa.gov/cag/county/mapping/</a> <br> Climate Data provided by the NCDC (National Centers for Environmental Information). The data were downloaded in a comma-separated file. Temporal information was modified in order to convert to a geoJSON file online. No other modifications were made to the dataset.
           <br> <br> (2.) &nbsp; <a target="_blank" href="https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/"> https://www.washingtonpost.com/climate-environment/2020/08/07/how-use-posts-climate-data-analysis/</a> <br> Temperature Anomaly and Population Data. Part of a climate change analysis performed by Washington Post staff in August 2020.
-          <br> <br> (3.) &nbsp; <a target="_blank" href="https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa"> https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa</a> <br> Texas Counties GEOJSON. Manually added precipitation and temperature fields from the NCDC source, as well as temperature anomaly and population fields from the Washington Post source. </p>
+          <br> <br> (3.) &nbsp; <a target="_blank" href="https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa"> https://data.texas.gov/Government-and-Taxes/County-Map/48ag-x9aa</a> <br> Texas Counties embedded in a GEOJSON file. Manually added precipitation and temperature fields from the NCDC source, as well as temperature anomaly and population fields from the Washington Post source. </p>
     <p> <br> </p>
     <p> <br> </p>
     <p> <br> </p>
