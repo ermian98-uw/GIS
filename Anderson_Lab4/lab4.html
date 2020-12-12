@@ -21,13 +21,13 @@
 
   <body>
     <p> <br> </p> <!-- Title of page -->
-    <h1 style="font-variant:small-caps;"> Examining Texas Climate in 1999 </h1>
+    <h1 style="font-variant:small-caps;"> Examining Climate in Texas, 1999 </h1>
     <p> <br> </p>
     <p> <br> </p>
     <center> <p id="divide" <br> ERIC ANDERSON <br> TGIS 503 </p> </center>
     <p> <br> </p>
     <p> <br> </p>
-    <p style="font-size:115%;text-align:center;"> <br> A common metric for identifying global warming due to climate change is the "temperature anomaly" from a previous era (such as the 19th or 20th century average). Across the majority of the planet, these anomaly values are in the positive, including most parts of Texas. On this webpage, we will visualize temperature anomalies by county by month in 1999. We will also consider monthly precipitation accumulation. </p>
+    <p style="font-size:115%;text-align:center;"> <br> A common metric for identifying global warming due to climate change is "temperature anomaly" from a previous era (such as the 19th or 20th century average). Across the majority of the planet, these anomalies are in the positive, and Texas is no exception. On this webpage, we will visualize temperature anomalies by county by month in 1999. We will also consider monthly precipitation accumulation. </p>
     <p> <br> </p>
     <p> <br> </p>
     <p style="font-size:95%;text-align:center;"> <br> <i> (Use Google Chrome full screen for best user experience) </i> </p>
@@ -91,12 +91,12 @@
           </div>
           <p> <br> </p>
           <div class='map-overlay2' id='legend2'></div>
-          <h5> Temperature values are in Fahrenheit. <br> <br> County boundaries determined by the 1999 population estimate (darker/thicker = more densely populated). <br> <br> Use the play/pause button to start/stop a timelapse. While paused, map will oscillate between the estimated 1895 and 1999 means for that month. <br> <br> Map has hover and click (pop-up) functionalities. <br> <br> Right-click and drag for a 3-D effect at any time. </h5>
+          <h5> Temperature values are in Fahrenheit. <br> <br> County boundaries determined by the 1999 population estimate (darker/thicker = more densely populated). <br> <br> Use the play/pause button to start/stop timelapse. While paused, map will oscillate between the estimated 1895 and 1999 means for that month. <br> <br> Map has hover and click (pop-up) functionalities. <br> <br> Right-click and drag for a 3-D effect at any time. </h5>
         </div> </center>
 
     <!-- Description below maps -->
     <p> <br> </p>
-    <center> <button class="collap" style="color:#785C0E"> <b> Temperature Anomalies </b> </button>
+    <center> <button class="collap" style="color:#785C0E"> <b> Temperature Anomalies (1895-1999) </b> </button>
       <div class="content" style="width:45%;background-color:"#999";">
         <center> <a href= "https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab4/TA.jpg" download>
           <img src="https://raw.githubusercontent.com/ermian98-uw/GIS/main/Anderson_Lab4/TA.jpg" alt="Texas Anomalies" style="width:100%"> </center>
@@ -109,11 +109,11 @@
     <p style="font-size:95%;text-align:center;"> <i> (Preview my customized Mapbox style <a target="_blank" href=https://api.mapbox.com/styles/v1/ermian98/ckhws5qm105i819phtroyx21o.html?fresh=true&title=view&access_token=pk.eyJ1IjoiZXJtaWFuOTgiLCJhIjoiY2tnaXVwYWtrMGEwbjJ1cGRlZDQ2bmd1OCJ9.gy2NOY8e3cmhzG6JiEyj4A>here</a>) </i> </p>
 
     <p id="divide">
-    <p> <br> As you saw hidden within the buttons, the two choropleth maps describe temperature and precipitation for each Texas county in 1999 (as obtained by the NCDC). Note that the geographic center of Texas is at the coordinates [-99.1704, 31.3912] (northeastern McColloch County). </p>
-    <p> <br> Three counties (Ellis, Kaufman, Kinney) out of 254 miraculously report lower mean annual temperature than ~100 years prior. The others show a clear spatial distribution, with far-west counties warming the most (+2.5 degrees F). Note that some of the urban space values are slightly higher than their rural neighbors (especially the Austin and Temple region). </p>
+    <p> <br> As you saw hidden inside the buttons, the two choropleth maps describe temperature and precipitation for each Texas county in 1999 (as obtained by the NCDC). Note that the geographic center of Texas is at the coordinates [-99.1704, 31.3912] (northeastern McColloch County). </p>
     <p> <br> Precipitation accumulation very clearly varies over the year. The northern and eastern counties are the wettest but see more precipitation in the cooler months (because of low pressure systems influenced by the Arctic), while the southern and western counties see more precipitation in the warmer months (because of equatorial weather patterns bringing in more tropical storms). </p>
-    <p> <br> Local weather analyses such as these are interesting to me. My Capstone project for the Master of Science in Geospatial Technologies will tackle a similar subject by investigating ways to more accurately estimate temperature across topologically diverse land surfaces. </p>
-    <p> <br> <u> <b> Note:</b></u> I understand this is a somewhat silly and not robust climate analysis; but, the data were readily available and the maps still tell a compelling story. </p>
+    <p> <br> Three counties (Ellis, Kaufman, Kinney) out of 254 miraculously report lower mean annual temperature than ~100 years prior. The others demonstrate a clear spatial distribution, with far-west counties warming the most (+2.5 degrees F) and far-east counties warming the least (< +0.2 degrees F). Note that some of the urban space anomalies are slightly higher than their rural neighbors (especially the Austin and Temple region). </p>
+    <p> <br> Local weather analyses such as these are interesting to me. My Capstone project for the Master of Science in Geospatial Technologies will tackle a similar subject by investigating methods to more accurately estimate temperature across topologically diverse land surfaces. </p>
+    <p> <br> <u> <b> Note:</b></u> I understand this is a somewhat silly and not robust climate analysis; but, the data were readily available and my maps still introduce a compelling story. </p>
 
     <p> <br> </p>
     <p id="divide"> <!-- References and conclusion -->
@@ -445,6 +445,9 @@
           cycleMonths2 = window.setInterval(function() {slide2(advanceMonth2()) }, 750);
         }
       })
+	    
+      window.setInterval(function() {
+	  window.clearInterval(cycleMonths2); }, 32000)
 
       map2.on('load', function(){ // map with temp values
         var counties_T = "TX_counties2.geojson"
