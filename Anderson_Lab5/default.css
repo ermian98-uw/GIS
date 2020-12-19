@@ -728,6 +728,13 @@
 		color: #FFFFFF;
 	}
 
+	#mytext {
+		text-align:left;
+		margin:auto;
+		width:900px;
+		font-size:125%;
+	}
+
 	.slides {
 		width:630px;
 		height:500px;
