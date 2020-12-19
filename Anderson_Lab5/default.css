@@ -496,6 +496,8 @@
 		border-right: 1px solid rgba(0,0,0,.1);
 	}
 
+
+
 /*********************************************************************************/
 /* Sidebar                                                                       */
 /*********************************************************************************/
@@ -725,3 +727,20 @@
 		text-align: center;
 		color: #FFFFFF;
 	}
+
+	.slides {
+		width:630px;
+		height:500px;
+		overflow:hidden;
+	}
+
+	.slides img{
+		position:absolute;
+		display: inline-block;
+		animation:slides 30s infinite;
+		opacity:0;}
+
+	@keyframes slides {25%{opacity:1;} 40%{opacity:0;}}
+	.slides img:nth-child(1){animation-delay:0s;}
+	.slides img:nth-child(2){animation-delay:10s;}
+	.slides img:nth-child(3){animation-delay:20s;}
