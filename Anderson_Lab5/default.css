@@ -38,10 +38,6 @@
 		line-height: 180%;
 	}
 
-	strong
-	{
-	}
-
 	a
 	{
 		color: #16A085;
@@ -199,15 +195,6 @@
 	}
 
 /*********************************************************************************/
-/* List Styles                                                                   */
-/*********************************************************************************/
-
-	ul.style1
-	{
-	}
-
-
-/*********************************************************************************/
 /* Social Icon Styles                                                            */
 /*********************************************************************************/
 
@@ -311,7 +298,6 @@
 	{
 		overflow: hidden;
 		padding: 2em 0em;
-		background: url(images/bg01.jpg) repeat-x center top;
 	}
 
 	#header
@@ -431,14 +417,6 @@
 		text-align: center;
 	}
 
-	#wrapper3
-	{
-	}
-
-	#wrapper4
-	{
-	}
-
 /*********************************************************************************/
 /* Welcome                                                                       */
 /*********************************************************************************/
@@ -496,18 +474,6 @@
 		border-right: 1px solid rgba(0,0,0,.1);
 	}
 
-
-
-/*********************************************************************************/
-/* Sidebar                                                                       */
-/*********************************************************************************/
-
-	#sidebar
-	{
-		float: right;
-		width: 350px;
-	}
-
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
@@ -555,7 +521,7 @@
 	#newsletter
 	{
 		overflow: hidden;
-		padding: 8em 0em;
+
 		background: #EDEDED;
 		text-align: center;
 	}
@@ -628,68 +594,6 @@
 /* Three Columns                                                                 */
 /*********************************************************************************/
 
-	#three-column
-	{
-		overflow: hidden;
-		text-align: center;
-	}
-
-	#three-column h2
-	{
-		margin: 1em 0em;
-		font-size: 1.5em;
-		font-weight: 700;
-	}
-
-	#three-column .icon
-	{
-		position: relative;
-		display: block;
-		margin: 0px auto 0.80em auto;
-		background: none;
-		line-height: 150px;
-		font-size: 4em;
-		width: 150px;
-		height: 150px;
-		border-radius: 100px;
-		border: 6px solid #67128F;
-		text-align: center;
-		color: #FFF;
-
-	}
-
-	#three-column #tbox1,
-	#three-column #tbox2,
-	#three-column #tbox3
-	{
-		float: left;
-		width: 320px;
-		padding: 80px 40px 80px 40px;
-	}
-
-	#three-column .title
-	{
-		text-align: center;
-	}
-
-	#three-column .title h2
-	{
-		font-size: 1.60em;
-	}
-
-	#three-column .title .byline
-	{
-		padding-top: 0.50em;
-		font-size: 0.90em;
-		color: #858585;
-	}
-
-	#three-column .arrow-down
-	{
-		border-top-color: #292929;
-	}
-
-
 	ul.tools
 	{
 		margin: 0;
@@ -731,7 +635,7 @@
 	#mytext {
 		text-align:left;
 		margin:auto;
-		width:775px;
+		width:700px;
 		font-size:125%;
 	}
 
