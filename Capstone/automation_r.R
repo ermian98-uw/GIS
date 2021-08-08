@@ -1,3 +1,4 @@
+library(magick)
 library(rvest)
 library(RSelenium)
 library(pracma)
@@ -130,8 +131,8 @@ for (h in 1:length(wa_comm)) {
           html_text()
         
         heading1 <- str_match(icon_text1, "Weather Station ID: \\s*(.*?)\\s*Station Name:")[,2]
-        lat1 <- as.numeric(str_match(icon_text1, "Longitude:\\s*(.*?)\\s*° N")[,2])
-        long1 <- as.numeric(paste("-",str_match(icon_text1, "N, \\s*(.*?)\\s*° W")[,2], sep=""))
+        lat1 <- as.numeric(str_match(icon_text1, "Longitude:\\s*(.*?)\\s*Â° N")[,2])
+        long1 <- as.numeric(paste("-",str_match(icon_text1, "N, \\s*(.*?)\\s*Â° W")[,2], sep=""))
         
         loc_row1 <- c(heading1, lat1, long1)
         coords1[count,] <- loc_row1
@@ -334,8 +335,8 @@ for (k in 1:1200) {
             t_count = t_count + 1
             
             if (abs(difftime_for_compare) <= 5) {
-              if (is.na(str_match(site1[i], "PM\\s*(.*?)\\s*°F")[2])) { temps <- c(temps, as.numeric(str_match(site1[i], "AM\\s*(.*?)\\s*°F")[2])) }
-              if (!is.na(str_match(site1[i], "PM\\s*(.*?)\\s*°F")[2])) { temps <- c(temps, as.numeric(str_match(site1[i], "PM\\s*(.*?)\\s*°F")[2])) }
+              if (is.na(str_match(site1[i], "PM\\s*(.*?)\\s*Â°F")[2])) { temps <- c(temps, as.numeric(str_match(site1[i], "AM\\s*(.*?)\\s*Â°F")[2])) }
+              if (!is.na(str_match(site1[i], "PM\\s*(.*?)\\s*Â°F")[2])) { temps <- c(temps, as.numeric(str_match(site1[i], "PM\\s*(.*?)\\s*Â°F")[2])) }
             } else { temps <- c(temps, "N/A") }
           }
           Sys.sleep(0.25)
@@ -486,7 +487,7 @@ mydata[,"Air_Temp_w_Real_Pen"] = NA
 mydata[,"Diff"] = NA
 
 merged_data = merge(mydata, my_pen, by.x = c( "Season", "Land.Cover.Type","Altitude.Category","Shade.Status"),
-                    by.y = c( "ï..Season", "Land.Cover.Type","Altitude.Category","Shade.Status"))
+                    by.y = c( "Ã¯..Season", "Land.Cover.Type","Altitude.Category","Shade.Status"))
 
 merged_data[,"Air_Temp_w_Real_Pen"] = merged_data[,"Surf_Temp.x"] - merged_data[,"Penalty.y"]
 merged_data[,"Diff"] = (merged_data[,"Air_Temp.x"] - merged_data[,"Air_Temp_w_Real_Pen"])*-1
@@ -583,4 +584,22 @@ colnames(cum_all_p) = columns
 everything = rbind(cum_lc_p,cum_sh_p,cum_al_p,cum_se_p,cum_all_p)
 write.csv(everything,"C:/Users/eric-/Desktop/MGST_Final/MGST_Final/__MASTER/_Bootstrapped.csv")
 
+            
+##################
+# Step SEVEN: Brief lines of code to create GIFs (animation of raster layers)
+                             
+## Read the gifs exported from ArcGIS Pro
+imgs <- c(list.files("C:/Users/eric-/Desktop/MGST_Final/MGST_Final/gifs_input", full.names = TRUE))
+img_list <- lapply(imgs, image_read)
+
+## Join using ImageMagick library
+img_joined <- image_join(img_list)
+
+## Animate, one frame per second
+img_animated <- image_animate(img_joined, fps = 1)
+
+## Save
+image_write(image = img_animated,
+            path = "C:/Users/eric-/Desktop/MGST_Final/MGST_Final/gifs_output/[insert GIF name here].gif") 
+                             
 ### END ###
